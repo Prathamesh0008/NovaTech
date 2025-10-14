@@ -78,7 +78,7 @@ export default function DiseaseFeaturedSection() {
       <div className="mt-8 flex justify-center">
         <button
           onClick={onViewAllProducts}
-          className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition transform hover:scale-105"
+          className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700  transform hover:scale-105 hover:shadow-xl transition-all duration-300"
         >
           Check More {selected}
         </button>

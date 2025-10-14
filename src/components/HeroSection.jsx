@@ -6,7 +6,7 @@ const headline = "Innovative Healthcare Solutions".split(" ");
 
 export default function HeroSection() {
   return (
-    <section className="relative w-full mb-12  bg-gradient-to-r from-blue-200 to-blue-400 overflow-hidden flex flex-col md:flex-row items-center justify-between p-10">
+    <section className="relative w-full  bg-gradient-to-r from-blue-200 to-blue-400 overflow-hidden flex flex-col md:flex-row items-center justify-between p-10">
 
       {/* Floating pills */}
       {[...Array(4)].map((_, i) => (
