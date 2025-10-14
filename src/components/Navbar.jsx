@@ -71,13 +71,47 @@ export default function Navbar() {
             ))}
 
             {/* Animated underline */}
-            <motion.div
-              className={`absolute bottom-0 h-0.5 rounded-full ${
-                scrolled ? "bg-blue-400" : "bg-blue-600"
-              }`}
-              animate={{ left: underlineProps.left, width: underlineProps.width }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            />
+           <motion.div
+  className={`absolute bottom-0 h-0.5 rounded-full ${
+    scrolled ? "bg-blue-400" : "bg-blue-600"
+  }`}
+  // We animate left (x) and width, but also use opacity & scaleX
+  initial={{ opacity: 0, scaleX: 0.5 }}
+  animate={{
+    left: underlineProps.left,
+    width: underlineProps.width,
+    opacity: 1,
+    scaleX: 1,
+  }}
+  exit={{ opacity: 0, scaleX: 0.5 }}
+  transition={{
+    // Use keyframes for more “drama”
+    // You can split the motion: first expand slightly, then settle back
+    width: {
+      // animate width: start a bit smaller, overshoot, then contract
+      type: "keyframes",
+      values: [
+        underlineProps.width * 0.8,
+        underlineProps.width * 1.1,
+        underlineProps.width,
+      ],
+      times: [0, 0.7, 1],
+    },
+    left: {
+      type: "spring",
+      stiffness: 300,
+      damping: 25,
+    },
+    opacity: { duration: 0.2 },
+    scaleX: {
+      type: "spring",
+      stiffness: 400,
+      damping: 30,
+    },
+    // Overall duration
+    duration: 0.5,
+  }}
+/>
           </div>
         </div>
 

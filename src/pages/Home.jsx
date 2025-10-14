@@ -5,6 +5,7 @@ import CategoryCard from "../components/CategoryCard";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import HeroSection from "../components/HeroSection";
+import DiseaseFeaturedSection from "../components/DiseaseFeaturedSection";
 
 
 
@@ -49,7 +50,7 @@ export default function Home() {
       </section>
 
       {/* Categories Section */}
-      <section className="mb-12">
+      {/* <section className="mb-12">
         <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
           Medicine Categories
         </h2>
@@ -65,10 +66,10 @@ export default function Home() {
   ))}
 </div>
 
-      </section>
-
+      </section> */}
+      <DiseaseFeaturedSection/>
       {/* Featured Products */}
-      <section className="mb-12">
+      {/* <section className="mb-12">
         <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
           Featured Products
         </h2>
@@ -83,7 +84,7 @@ export default function Home() {
   ))}
 </div>
 
-      </section>
+      </section> */}
 
       {/* About NovaTech */}
       <section className="bg-gray-100 rounded-xl p-8 mb-12 text-center">
