@@ -45,7 +45,7 @@ export default function DiseaseFeaturedSection() {
             className={`px-4 py-2 whitespace-nowrap rounded-full border transition-colors duration-200
               ${
                 selected === cat.key
-                  ? "bg-blue-600 text-white border-blue-600"
+                  ? "bg-[#3386bc] text-white border-blue-600"
                   : "bg-white text-gray-800 border-gray-300 hover:bg-blue-100 hover:border-blue-400"
               }`}
           >
@@ -78,7 +78,7 @@ export default function DiseaseFeaturedSection() {
       <div className="mt-8 flex justify-center">
         <button
           onClick={onViewAllProducts}
-          className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700  transform hover:scale-105 hover:shadow-xl transition-all duration-300"
+          className="px-6 py-3 bg-[#314977] text-white rounded-lg hover:bg-blue-700  transform hover:scale-105 hover:shadow-xl transition-all duration-300"
         >
           Check More {selected}
         </button>

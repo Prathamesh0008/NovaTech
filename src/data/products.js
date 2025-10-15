@@ -58,6 +58,8 @@ export const products = [
       "https://picsum.photos/500/500?random=311",
       "https://picsum.photos/500/500?random=312"
     ],
+
+    // #0d1b4b dark #4bb2e5 light
     price: "₹399",
     category: "Thyrocare",
     composition: "Iodine, selenium, zinc",

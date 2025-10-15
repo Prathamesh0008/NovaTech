@@ -36,13 +36,13 @@ export default function Home() {
   <div className="flex justify-center gap-4 animate-fadeIn delay-200">
     <a
       href="/products"
-      className="bg-blue-600 text-white px-6 py-2 rounded-lg shadow-md hover:bg-blue-700 transform hover:scale-105 hover:shadow-xl transition-all duration-300"
+      className="bg-[#314977] text-white px-6 py-2 rounded-lg shadow-md hover:bg-[#0d1b4b]transform hover:scale-105 hover:shadow-xl transition-all duration-300"
     >
       Explore Products
     </a>
     <a
       href="/contact"
-      className="bg-gray-300 text-gray-800 px-6 py-2 rounded-lg shadow-md hover:bg-gray-400 transform hover:scale-105 hover:shadow-xl transition-all duration-300"
+      className="bg-[#3386bc] text-white  px-6 py-2 rounded-lg shadow-md hover:bg-[#4bb2e5] transform hover:scale-105 hover:shadow-xl transition-all duration-300"
     >
       Contact Us
     </a>
