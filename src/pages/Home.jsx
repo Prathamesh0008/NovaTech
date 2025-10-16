@@ -6,6 +6,11 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import HeroSection from "../components/HeroSection";
 import DiseaseFeaturedSection from "../components/DiseaseFeaturedSection";
+import BannerSlider from "../components/BannerSlider";
+import banner1 from "../assets/banners/banner1.png"
+import banner2 from "../assets/banners/banner2.png"
+import banner3 from "../assets/banners/banner3.png"
+
 
 
 
@@ -18,9 +23,17 @@ export default function Home() {
     { name: "High Sugar", image: "/images/highsugar.jpg", link: "/products" },
     { name: "BP", image: "/images/bp.jpg", link: "/products" },
   ];
+ const banners = [
+  { image: banner1, alt: "Health Concern", title: "Your Health, Our Priority" },
+  { image: banner2, alt: "Medicine Banner", title: "World Class Medicines" },
+  { image: banner3, alt: "Medical Banner", title: "Trusted Healthcare Solutions" },
+  { image: banner1, alt: "Health Care", title: "Caring for You Always" },
+];
+
 
   return (
     <>
+    <BannerSlider banners={banners}/>
     <HeroSection/>
     <div className="max-w-6xl w-full mx-auto ">
       
