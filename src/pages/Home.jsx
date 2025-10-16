@@ -7,9 +7,9 @@ import 'aos/dist/aos.css';
 import HeroSection from "../components/HeroSection";
 import DiseaseFeaturedSection from "../components/DiseaseFeaturedSection";
 import BannerSlider from "../components/BannerSlider";
-import banner1 from "../assets/banners/banner1.png"
-import banner2 from "../assets/banners/banner2.png"
-import banner3 from "../assets/banners/banner3.png"
+import banner1 from "../assets/banners/gdrive1.png"
+import banner2 from "../assets/banners/gdrive2.jpg"
+import banner3 from "../assets/banners/gdrive3.jpg"
 
 
 
@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <>
     <BannerSlider banners={banners}/>
-    <HeroSection/>
+    {/* <HeroSection/> */}
     <div className="max-w-6xl w-full mx-auto ">
       
       {/* Hero Section */}
