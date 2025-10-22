@@ -1,5 +1,3 @@
-// src/data/products.js
-
 export const products = [
   {
     id: 1,
@@ -15,7 +13,9 @@ export const products = [
     composition: "Salbutamol, inert carrier agents",
     usage: "1–2 puffs daily or as prescribed",
     benefits: "Relieves wheezing and improves breathing",
-    storage: "Store below 30°C, keep dry"
+    storage: "Store below 30°C, keep dry",
+    indication: "Used for quick relief in asthma and chronic obstructive pulmonary disease (COPD).",
+    presentation: "Metered dose inhaler containing 200 puffs of 100mcg Salbutamol."
   },
   {
     id: 2,
@@ -31,7 +31,9 @@ export const products = [
     composition: "Levosalbutamol, additives",
     usage: "Use when symptoms occur, as directed",
     benefits: "Quick relief from bronchospasm",
-    storage: "Keep in cool & dry place away from direct sunlight"
+    storage: "Keep in cool & dry place away from direct sunlight",
+    indication: "For relief of bronchospasm and shortness of breath in asthma and allergic airway diseases.",
+    presentation: "Each 100ml bottle contains 1mg/ml Levosalbutamol oral solution."
   },
   {
     id: 3,
@@ -47,7 +49,9 @@ export const products = [
     composition: "Salbutamol sulfate solution",
     usage: "Shake & inhale deeply, 1 puff",
     benefits: "Efficient lung delivery, fewer side effects",
-    storage: "Store upright, avoid heat"
+    storage: "Store upright, avoid heat",
+    indication: "Recommended for rapid relief of bronchospasm due to asthma or COPD.",
+    presentation: "Pressurized inhaler, 200 metered doses."
   },
   {
     id: 4,
@@ -58,14 +62,14 @@ export const products = [
       "https://picsum.photos/500/500?random=311",
       "https://picsum.photos/500/500?random=312"
     ],
-
-    // #0d1b4b dark #4bb2e5 light
     price: "₹399",
     category: "Thyrocare",
     composition: "Iodine, selenium, zinc",
     usage: "One tablet daily after food",
     benefits: "Supports thyroid function",
-    storage: "Store in a cool, dry place"
+    storage: "Store in a cool, dry place",
+    indication: "For individuals with hypothyroid tendencies or iodine deficiency.",
+    presentation: "Blister pack of 30 tablets."
   },
   {
     id: 5,
@@ -81,7 +85,9 @@ export const products = [
     composition: "Higher dose iodine + adaptogens",
     usage: "1 capsule daily with water",
     benefits: "Boosts metabolic and thyroid balance",
-    storage: "Keep sealed, avoid moisture"
+    storage: "Keep sealed, avoid moisture",
+    indication: "For supporting thyroid hormone synthesis and metabolism.",
+    presentation: "Bottle of 60 capsules."
   },
   {
     id: 6,
@@ -97,7 +103,9 @@ export const products = [
     composition: "Green tea extract, garcinia, fibres",
     usage: "One capsule before meals",
     benefits: "Supports metabolism & fat burn",
-    storage: "Store below 25°C, dry place"
+    storage: "Store below 25°C, dry place",
+    indication: "Designed to aid in weight management by promoting fat metabolism.",
+    presentation: "Bottle of 60 vegetarian capsules."
   },
   {
     id: 7,
@@ -113,7 +121,9 @@ export const products = [
     composition: "Chromium, L-carnitine, green coffee",
     usage: "Take 2 capsules daily",
     benefits: "Enhances energy & supports weight management",
-    storage: "Protect from light and moisture"
+    storage: "Protect from light and moisture",
+    indication: "Supports fat oxidation and energy balance for effective weight control.",
+    presentation: "Plastic jar containing 60 capsules."
   },
   {
     id: 8,
@@ -129,7 +139,9 @@ export const products = [
     composition: "Protein, fibre, vitamins",
     usage: "Mix 1 scoop in water / milk",
     benefits: "Meal replacement & supports satiety",
-    storage: "Keep sealed & dry"
+    storage: "Keep sealed & dry",
+    indication: "Ideal as a low-calorie meal replacement for weight reduction programs.",
+    presentation: "Tin pack containing 500g nutritional powder."
   },
   {
     id: 9,
@@ -145,7 +157,9 @@ export const products = [
     composition: "Potassium, magnesium, garlic extract",
     usage: "Take 1 tablet daily",
     benefits: "Helps maintain healthy blood pressure",
-    storage: "Store in cool & dry place"
+    storage: "Store in cool & dry place",
+    indication: "For individuals with mild hypertension or cardiac stress.",
+    presentation: "Box of 30 tablets."
   },
   {
     id: 10,
@@ -161,7 +175,9 @@ export const products = [
     composition: "Hibiscus, CoQ10, minerals",
     usage: "Take once daily",
     benefits: "Supports vascular health & BP",
-    storage: "Protect from heat & humidity"
+    storage: "Protect from heat & humidity",
+    indication: "Used as a natural supplement for maintaining normal blood pressure.",
+    presentation: "Plastic bottle of 60 capsules."
   },
   {
     id: 11,
@@ -177,7 +193,9 @@ export const products = [
     composition: "Herbal blend, minerals",
     usage: "Once daily after meal",
     benefits: "Supports cardiovascular balance",
-    storage: "Keep sealed & cool"
+    storage: "Keep sealed & cool",
+    indication: "For long-term management of hypertension and heart health.",
+    presentation: "Pack of 30 tablets."
   },
   {
     id: 12,
@@ -193,7 +211,9 @@ export const products = [
     composition: "Berberine, cinnamon, chromium",
     usage: "Take 1 capsule daily",
     benefits: "Supports stable blood sugar",
-    storage: "Keep in dry place"
+    storage: "Keep in dry place",
+    indication: "For individuals seeking to control high blood glucose naturally.",
+    presentation: "Bottle of 60 capsules."
   },
   {
     id: 13,
@@ -209,7 +229,9 @@ export const products = [
     composition: "Gymnema, chromium, fenugreek",
     usage: "One tablet before meals",
     benefits: "Helps support healthy glucose metabolism",
-    storage: "Store in cool, dark place"
+    storage: "Store in cool, dark place",
+    indication: "Assists in reducing post-meal glucose spikes.",
+    presentation: "Strip of 10 tablets (3 strips per box)."
   },
   {
     id: 14,
@@ -225,7 +247,9 @@ export const products = [
     composition: "Alpha lipoic acid, chromium, herbs",
     usage: "1 capsule daily",
     benefits: "Helps protect against sugar spikes",
-    storage: "Store away from heat"
+    storage: "Store away from heat",
+    indication: "Used to maintain balanced blood glucose and reduce oxidative stress.",
+    presentation: "Pack of 30 vegetarian capsules."
   },
   {
     id: 15,
@@ -241,7 +265,9 @@ export const products = [
     composition: "Powdered bronchodilator mix",
     usage: "Inhale deeply as prescribed",
     benefits: "Quick relief, convenient form",
-    storage: "Keep dry and sealed"
+    storage: "Keep dry and sealed",
+    indication: "For control and prevention of bronchospasm in asthma and COPD.",
+    presentation: "Dry powder inhaler containing 60 doses."
   },
   {
     id: 16,
@@ -257,7 +283,9 @@ export const products = [
     composition: "Iodine, ashwagandha, zinc",
     usage: "Take daily after food",
     benefits: "Supports hormonal balance & energy",
-    storage: "Cool, dry storage"
+    storage: "Cool, dry storage",
+    indication: "Supports thyroid hormone production and combats fatigue.",
+    presentation: "Blister pack of 30 tablets."
   },
   {
     id: 17,
@@ -273,7 +301,9 @@ export const products = [
     composition: "High dose iodine + adaptogenic herbs",
     usage: "Take once daily",
     benefits: "Stronger thyroid support",
-    storage: "Store sealed away from heat"
+    storage: "Store sealed away from heat",
+    indication: "Recommended for advanced thyroid deficiency support.",
+    presentation: "Bottle of 60 capsules."
   },
   {
     id: 18,
@@ -289,7 +319,9 @@ export const products = [
     composition: "Herbal mix, minerals",
     usage: "1 capsule daily",
     benefits: "Gentle support for BP control",
-    storage: "Keep in cool, dry place"
+    storage: "Keep in cool, dry place",
+    indication: "For mild hypertension and stress-related BP fluctuations.",
+    presentation: "Container of 30 capsules."
   },
   {
     id: 19,
@@ -305,7 +337,9 @@ export const products = [
     composition: "Caffeine, green tea, capsicum",
     usage: "1 capsule 30 min before exercise",
     benefits: "Boosts metabolism & fat burning",
-    storage: "Store tightly closed"
+    storage: "Store tightly closed",
+    indication: "Aids fat oxidation and energy expenditure during workouts.",
+    presentation: "Bottle of 60 capsules."
   },
   {
     id: 20,
@@ -321,6 +355,8 @@ export const products = [
     composition: "Bitter melon, chromium, fenugreek",
     usage: "Take 1 capsule daily before food",
     benefits: "Helps smooth out glucose fluctuations",
-    storage: "Dry & cool place"
+    storage: "Dry & cool place",
+    indication: "For maintaining healthy blood glucose levels naturally.",
+    presentation: "Box of 30 capsules."
   }
 ];
