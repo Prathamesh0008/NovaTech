@@ -66,8 +66,8 @@ export default function Navbar() {
             className={({ isActive }) =>
               `relative font-medium transition-transform duration-300 transform hover:scale-105 ${
                 scrolled
-                  ? "text-gray-700 hover:text-blue-400"
-                  : "text-gray-700 hover:text-blue-600"
+                  ? "text-[#3386bc] hover:text-blue-400"
+                  : "text-[#3386bc] hover:text-blue-400"
               }`
             }
           >
@@ -77,7 +77,7 @@ export default function Navbar() {
 
         <motion.div
           className={`absolute bottom-0 h-0.5 rounded-full ${
-            scrolled ? "bg-[#3386bc]" : "bg-[#3386bc]"
+            scrolled ? "bg-[#314977]" : "bg-[#314977]"
           }`}
           initial={{ opacity: 0, scaleX: 0.5 }}
           animate={{

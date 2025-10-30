@@ -9,6 +9,7 @@ import ContactUs from "./pages/ContactUs";
 import AntiCounterfeit from "./pages/AntiCounterfeit";
 import Blog from "./pages/Blog";
 import ProductDetails from "./pages/ProductDetails";
+import BlogDetails from "./pages/BlogDetails";
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
           <Route path="/products/:id" element={<ProductDetails />} />
           <Route path="/anti-counterfeit" element={<AntiCounterfeit />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element= {<BlogDetails/>}/>
+
           <Route path="/Contact" element={<ContactUs />} />
         </Routes>
       </div>
