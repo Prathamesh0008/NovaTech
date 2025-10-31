@@ -1,25 +1,34 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { categories } from "../data/categories";
 import { products } from "../data/products";
 import ProductCard from "./ProductCard";
 
 export default function DiseaseFeaturedSection() {
-  const [selected, setSelected] = useState(categories[0].key);
   const navigate = useNavigate();
 
-  const onSelect = (catKey) => {
-    console.log("Clicked category:", catKey);
-    setSelected(catKey);
-  };
+  // ✅ Actual NovaTech categories
+  const categories = [
+    {
+      key: "Tablets",
+      name: "Tablets Division",
+      description: "High-precision oral formulations designed for strength, stability, and purity.",
+      image: "/assets/banners/tablets.jpg",
+    },
+    {
+      key: "Injectables",
+      name: "Injectables Division",
+      description: "Sterile and controlled injectables ensuring rapid bioavailability and efficacy.",
+      image: "/assets/banners/injectables.jpg",
+    },
+  ];
 
-  const filteredProducts = products.filter((p) => {
-    // Debug: show categories and product
-    // console.log("Checking product", p.name, "category", p.category, "vs selected", selected);
-    return p.category === selected;
-  });
+  const [selected, setSelected] = useState(categories[0].key);
 
-  console.log("Selected:", selected, "Filtered count:", filteredProducts.length);
+  const onSelect = (catKey) => setSelected(catKey);
+
+  const filteredProducts = products.filter(
+    (p) => p.category?.toLowerCase() === selected.toLowerCase()
+  );
 
   const toShow = filteredProducts.slice(0, 4);
 
@@ -32,21 +41,29 @@ export default function DiseaseFeaturedSection() {
   };
 
   return (
-    <section className="mb-12">
-      <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-        Featured For You
-      </h2>
+    <section className="my-20" data-aos="fade-up">
+      {/* ===== Title Section ===== */}
+      <div className="text-center mb-10">
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3">
+          Featured Product Divisions
+        </h2>
+        <p className="text-gray-600 max-w-2xl mx-auto text-base">
+          Explore NovaTech’s specialized divisions built to meet the highest
+          standards in pharmaceutical excellence — from solid formulations to sterile injectables.
+        </p>
+      </div>
 
-      <div className="flex flex-wrap justify-center gap-4 mb-6 overflow-x-auto">
+      {/* ===== Category Buttons ===== */}
+      <div className="flex flex-wrap justify-center gap-4 mb-10 overflow-x-auto px-10 py-10">
         {categories.map((cat) => (
           <button
             key={cat.key}
             onClick={() => onSelect(cat.key)}
-            className={`px-4 py-2 whitespace-nowrap rounded-full border transition-colors duration-200
+            className={`px-6 py-3 whitespace-nowrap rounded-full font-medium border transition-all duration-300 shadow-sm
               ${
                 selected === cat.key
-                  ? "bg-[#3386bc] text-white border-blue-600"
-                  : "bg-white text-gray-800 border-gray-300 hover:bg-blue-100 hover:border-blue-400"
+                  ? "bg-[#3386bc] text-white border-[#3386bc] scale-105"
+                  : "bg-white text-gray-700 border-gray-300 hover:bg-blue-50 hover:border-[#3386bc]"
               }`}
           >
             {cat.name}
@@ -55,32 +72,61 @@ export default function DiseaseFeaturedSection() {
 
         <button
           onClick={onViewAllCategories}
-          className="px-4 py-2 whitespace-nowrap rounded-full border transition-colors duration-200 bg-white text-gray-800 border-gray-300 hover:bg-blue-100 hover:border-blue-400"
+          className="px-6 py-3 whitespace-nowrap rounded-full font-medium border bg-white text-gray-700 border-gray-300 hover:bg-blue-50 hover:border-[#3386bc] transition-all duration-300 shadow-sm"
         >
-          View All Categories
+          View All
         </button>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {/* ===== Banner Preview (Tablets / Injectables) ===== */}
+      <div className="relative max-w-5xl mx-auto mb-12 rounded-2xl overflow-hidden shadow-lg">
+        <img
+          src={
+            categories.find((c) => c.key === selected)?.image ||
+            "/assets/banners/default.jpg"
+          }
+          alt={selected}
+          className="w-full h-72 object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent flex flex-col justify-end p-6">
+          <h3 className="text-2xl font-bold text-white">
+            {categories.find((c) => c.key === selected)?.name}
+          </h3>
+          <p className="text-gray-200 text-sm max-w-lg">
+            {categories.find((c) => c.key === selected)?.description}
+          </p>
+        </div>
+      </div>
+
+      {/* ===== Product Cards ===== */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 px-4">
         {toShow.length > 0 ? (
           toShow.map((p) => (
             <div key={p.id} className="h-full">
-              <ProductCard product={p} />
+              <ProductCard
+                product={{
+                  ...p,
+                  image:
+                    p.images?.[0] ||
+                    "https://via.placeholder.com/500x500?text=No+Image",
+                }}
+              />
             </div>
           ))
         ) : (
           <p className="text-center text-gray-500 col-span-full">
-            No medicines for this category yet.
+            No products available for this division yet.
           </p>
         )}
       </div>
 
-      <div className="mt-8 flex justify-center">
+      {/* ===== View All Button ===== */}
+      <div className="mt-10 flex justify-center">
         <button
           onClick={onViewAllProducts}
-          className="px-6 py-3 bg-[#314977] text-white rounded-lg hover:bg-blue-700  transform hover:scale-105 hover:shadow-xl transition-all duration-300"
+          className="px-8 py-3 bg-[#314977] text-white rounded-lg font-medium shadow-md hover:bg-[#0d1b4b] hover:scale-105 hover:shadow-xl transition-all duration-300"
         >
-          Check More {selected}
+          View All {selected} Products
         </button>
       </div>
     </section>

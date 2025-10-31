@@ -3,7 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
 import { FaFacebook, FaInstagram, FaLinkedin, FaEnvelope } from "react-icons/fa";
-import logo from "../assets/nova_new-removebg-preview.png";
+import logo from "../assets/logo_footer.png";
 
 export default function Footer() {
   const links = [

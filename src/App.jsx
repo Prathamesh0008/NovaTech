@@ -10,10 +10,12 @@ import AntiCounterfeit from "./pages/AntiCounterfeit";
 import Blog from "./pages/Blog";
 import ProductDetails from "./pages/ProductDetails";
 import BlogDetails from "./pages/BlogDetails";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <Router>
+      <ScrollToTop/>
       <Navbar />
       <div className="pt-15">
         <Routes>

@@ -5,19 +5,30 @@ const images = import.meta.glob("../assets/products/*.{jpg,jpeg,png,webp}", {
   eager: true,
 });
 
-// Helper function to get images by product name
+// Helper function to get matching images even if names differ slightly (e.g., spaces, dashes)
 const getImages = (name) => {
+  const normalizedName = name
+    .toLowerCase()
+    .replace(/\s+/g, "_")       // spaces → underscores
+    .replace(/[^a-z0-9_]/g, ""); // remove any other symbols
+
   const found = Object.keys(images)
-    .filter((k) => k.toLowerCase().includes(name.toLowerCase()))
+    .filter((k) => {
+      const file = k.toLowerCase().replace(/[^a-z0-9_]/g, "");
+      return file.includes(normalizedName);
+    })
     .map((k) => images[k].default);
 
   if (found.length > 0) return found;
+
+  // fallback placeholders
   return [
     "https://via.placeholder.com/500x500?text=Image+Coming+Soon",
     "https://via.placeholder.com/500x500?text=Image+Coming+Soon",
     "https://via.placeholder.com/500x500?text=Image+Coming+Soon",
   ];
 };
+
 
 // === TABLETS ===
 const tablets = [
@@ -136,7 +147,7 @@ const tablets = [
     presentation: "Pack of 10 tablets, 40 mcg each.",
   },
   {
-    name: "STANOVA_50",
+    name: "STANOVA 50",
     description: "STANOZOLOL USP 50 mg",
     indication: "Used for muscle strengthening and tissue repair.",
     presentation: "Box of 10 tablets, 50 mg each.",

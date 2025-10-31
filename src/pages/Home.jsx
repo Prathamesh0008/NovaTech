@@ -62,7 +62,7 @@ function StatsSection() {
       className="relative my-20 bg-[#f5fafb] rounded-xl p-10 grid md:grid-cols-4 text-center shadow-sm overflow-hidden"
       data-aos="fade-up"
     >
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#0b1e39] via-[#18487d] to-[#3386bc]" />
+      <div className="absolute top-0 left-0 w-full h-1 " />
       {stats.map((stat, i) => (
         <motion.div
           key={i}
@@ -159,22 +159,82 @@ export default function Home() {
         </section>
 
         {/* ✅ Categories */}
-        <section className="my-16" data-aos="fade-up">
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
-            Our Therapeutic Categories
-          </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
-            {categories.map((cat, idx) => (
-              <CategoryCard
-                key={idx}
-                name={cat.name}
-                image={cat.image}
-                link={cat.link}
-                className="transition-transform transform hover:scale-105"
-              />
-            ))}
-          </div>
-        </section>
+        <section className="my-20" data-aos="fade-up">
+  <div className="text-center mb-10">
+    <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3">
+      Our Therapeutic Divisions
+    </h2>
+    <p className="text-gray-600 max-w-2xl mx-auto text-base">
+      NovaTech Sciences specializes in two core pharmaceutical divisions — precision-formulated{" "}
+      <span className="font-semibold text-[#18487d]">Tablets</span> and
+      {" "}
+      <span className="font-semibold text-[#3386bc]">Injectables</span>,
+      designed to meet the highest standards of global healthcare and manufacturing quality.
+    </p>
+  </div>
+
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+    {/* Tablets Division */}
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      viewport={{ once: true }}
+      className="relative group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl border border-gray-100 transition-all duration-500 hover:-translate-y-2 cursor-pointer"
+    >
+      <img
+        src="/assets/banners/tablets.jpg"
+        alt="Tablets Division"
+        className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+      />
+      <div className="absolute inset-0 bg-[#18487d]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+        <a
+          href="/products?category=Tablets"
+          className="bg-white text-[#18487d] px-6 py-2 rounded-lg font-semibold shadow-md hover:bg-[#e6f3fa] transition-all"
+        >
+          Explore Tablets
+        </a>
+      </div>
+      <div className="p-6 text-center">
+        <h3 className="text-2xl font-bold text-[#18487d] mb-2">Tablets Division</h3>
+        <p className="text-gray-600 text-sm">
+          Oral solid dosage forms including hormones, anabolic, and therapeutic formulations
+          designed for precision and reliability.
+        </p>
+      </div>
+    </motion.div>
+
+    {/* Injectables Division */}
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.2 }}
+      viewport={{ once: true }}
+      className="relative group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl border border-gray-100 transition-all duration-500 hover:-translate-y-2 cursor-pointer"
+    >
+      <img
+        src="/assets/banners/injectables.jpg"
+        alt="Injectables Division"
+        className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+      />
+      <div className="absolute inset-0 bg-[#3386bc]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+        <a
+          href="/products?category=Injectables"
+          className="bg-white text-[#3386bc] px-6 py-2 rounded-lg font-semibold shadow-md hover:bg-[#e6f4fa] transition-all"
+        >
+          Explore Injectables
+        </a>
+      </div>
+      <div className="p-6 text-center">
+        <h3 className="text-2xl font-bold text-[#3386bc] mb-2">Injectables Division</h3>
+        <p className="text-gray-600 text-sm">
+          Sterile formulations including testosterone blends, anabolic esters, and specialized
+          therapeutic injectables ensuring purity and precision.
+        </p>
+      </div>
+    </motion.div>
+  </div>
+</section>
 
         {/* ✅ Disease Highlight */}
         <DiseaseFeaturedSection />
