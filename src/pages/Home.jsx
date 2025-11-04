@@ -3,17 +3,19 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-
 import { products } from "../data/products";
 import ProductCard from "../components/ProductCard";
 import CategoryCard from "../components/CategoryCard";
 import HeroSection from "../components/HeroSection";
 import DiseaseFeaturedSection from "../components/DiseaseFeaturedSection";
 import BannerSlider from "../components/BannerSlider";
-
 import banner1 from "../assets/banners/gdrive1.png";
 import banner2 from "../assets/banners/gdrive2.jpg";
-import banner3 from "../assets/banners/gdrive3.jpg";
+import banner3 from "../assets/banners/banner3.jpg";
+import banner5 from "../assets/banners/banner5.jpg";
+import sbanner1 from "../assets/smallBanners/tablets.png"
+import sbanner2 from "../assets/smallBanners/injectable.png"
+
 
 // ✅ Animated Count Component
 function CountUp({ target, suffix }) {
@@ -99,6 +101,8 @@ export default function Home() {
     { image: banner2, alt: "Medicine Banner", title: "World Class Medicines" },
     { image: banner3, alt: "Medical Banner", title: "Trusted Healthcare Solutions" },
     { image: banner1, alt: "Health Care", title: "Caring for You Always" },
+    { image: banner5, alt: "Medical Banner", title: "Trusted Healthcare Solutions" },
+
   ];
 
   return (
@@ -107,6 +111,7 @@ export default function Home() {
       <BannerSlider banners={banners} />
 
       <div className="max-w-7xl w-full mx-auto px-4 md:px-8">
+        {/* <HeroSection/> */}
         {/* ✅ Hero */}
         <section className="text-center py-16" data-aos="fade-up">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
@@ -183,9 +188,9 @@ export default function Home() {
       className="relative group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl border border-gray-100 transition-all duration-500 hover:-translate-y-2 cursor-pointer"
     >
       <img
-        src="/assets/banners/tablets.jpg"
+        src={sbanner1}
         alt="Tablets Division"
-        className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+        className="w-full h-94 object-cover group-hover:scale-105 transition-transform duration-500"
       />
       <div className="absolute inset-0 bg-[#18487d]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
         <a
@@ -213,9 +218,9 @@ export default function Home() {
       className="relative group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl border border-gray-100 transition-all duration-500 hover:-translate-y-2 cursor-pointer"
     >
       <img
-        src="/assets/banners/injectables.jpg"
+        src={sbanner2}
         alt="Injectables Division"
-        className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+        className="w-full h-94 object-cover group-hover:scale-105 transition-transform duration-500"
       />
       <div className="absolute inset-0 bg-[#3386bc]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
         <a

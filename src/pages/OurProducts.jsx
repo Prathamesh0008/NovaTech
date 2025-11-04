@@ -1,18 +1,31 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { products } from "../data/products";
 import ProductCard from "../components/ProductCard";
 import Breadcrumbs from "../components/Breadcrumbs";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function ProductsPage() {
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialCategory = searchParams.get("category") || "";
+
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [selectedProduct, setSelectedProduct] = useState("");
   const [selectedMg, setSelectedMg] = useState("");
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
-  // === Extract unique values dynamically ===
+  // Keep the selected category mirrored in the URL (?category=Tablets/Injectables)
+  useEffect(() => {
+    if (selectedCategory) {
+      setSearchParams({ category: selectedCategory });
+    } else {
+      setSearchParams({});
+    }
+  }, [selectedCategory, setSearchParams]);
+
   const categoryOptions = ["Tablets", "Injectables"];
 
+  // Product options depend on selected category
   const productOptions = useMemo(() => {
     if (!selectedCategory) return [];
     const filtered = products.filter(
@@ -21,16 +34,37 @@ export default function ProductsPage() {
     return Array.from(new Set(filtered.map((p) => p.name))).sort();
   }, [selectedCategory]);
 
+  // ✅ Dosage options now depend on selected product (and category)
   const mgOptions = useMemo(() => {
     const strengths = new Set();
-    products.forEach((p) => {
-      const match = p.description.match(/(\d+(\.\d+)?\s?(mg|mcg))/i);
-      if (match) strengths.add(match[0].toLowerCase());
-    });
-    return Array.from(strengths).sort((a, b) => parseFloat(a) - parseFloat(b));
-  }, []);
 
-  // === Filter logic ===
+    let filteredList = products;
+
+    // filter by selected category if chosen
+    if (selectedCategory) {
+      filteredList = filteredList.filter(
+        (p) => p.category?.toLowerCase() === selectedCategory.toLowerCase()
+      );
+    }
+
+    // filter by selected product if chosen
+    if (selectedProduct) {
+      filteredList = filteredList.filter(
+        (p) => p.name.toLowerCase() === selectedProduct.toLowerCase()
+      );
+    }
+
+    filteredList.forEach((p) => {
+      const match = p.description?.match(/(\d+(\.\d+)?\s?(mg|mcg))/gi);
+      if (match) {
+        match.forEach((m) => strengths.add(m.toLowerCase()));
+      }
+    });
+
+    return Array.from(strengths).sort((a, b) => parseFloat(a) - parseFloat(b));
+  }, [selectedCategory, selectedProduct]);
+
+  // Apply filters
   const filteredProducts = products.filter((p) => {
     const matchCategory =
       !selectedCategory ||
@@ -42,10 +76,17 @@ export default function ProductsPage() {
 
     const matchMg =
       !selectedMg ||
-      (p.description && p.description.toLowerCase().includes(selectedMg.toLowerCase()));
+      (p.description &&
+        p.description.toLowerCase().includes(selectedMg.toLowerCase()));
 
     return matchCategory && matchProduct && matchMg;
   });
+
+  // helper: pretty URL for detail with category preserved
+  const detailUrl = (p) =>
+    `/products/${encodeURIComponent(p.id || p.name)}?category=${encodeURIComponent(
+      selectedCategory || p.category || ""
+    )}`;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#f5f9fb] via-[#f3f8fa] to-[#e8f3f8]">
@@ -108,6 +149,7 @@ export default function ProductsPage() {
                         onChange={(e) => {
                           setSelectedCategory(e.target.value);
                           setSelectedProduct("");
+                          setSelectedMg("");
                         }}
                       >
                         <option value="">All</option>
@@ -127,7 +169,10 @@ export default function ProductsPage() {
                       <select
                         className="w-full border rounded-lg p-2 focus:ring-2 focus:ring-[#3386bc]"
                         value={selectedProduct}
-                        onChange={(e) => setSelectedProduct(e.target.value)}
+                        onChange={(e) => {
+                          setSelectedProduct(e.target.value);
+                          setSelectedMg("");
+                        }}
                         disabled={!selectedCategory}
                       >
                         <option value="">All</option>
@@ -148,6 +193,7 @@ export default function ProductsPage() {
                         className="w-full border rounded-lg p-2 focus:ring-2 focus:ring-[#3386bc]"
                         value={selectedMg}
                         onChange={(e) => setSelectedMg(e.target.value)}
+                        disabled={!selectedProduct}
                       >
                         <option value="">All</option>
                         {mgOptions.map((mg) => (
@@ -168,18 +214,19 @@ export default function ProductsPage() {
       {/* ===== Main Content ===== */}
       <div className="max-w-7xl mx-auto px-4 md:px-8 mt-10 pb-20 flex flex-col md:flex-row gap-8">
         {/* ===== Sidebar (Desktop Filters) ===== */}
-        <aside className="hidden md:block md:w-1/4 bg-white  p-6 shadow-lg sticky top-10 h-fit space-y-6">
+        <aside className="hidden md:block md:w-1/4 bg-white p-6 shadow-lg sticky top-10 h-fit space-y-6">
           {/* Category Filter */}
           <div>
             <label className="block text-sm font-semibold text-[#18487d] mb-2">
               Category
             </label>
             <select
-              className="w-full  p-2 focus:ring-2 focus:ring-[#3386bc]"
+              className="w-full p-2 focus:ring-2 focus:ring-[#3386bc]"
               value={selectedCategory}
               onChange={(e) => {
                 setSelectedCategory(e.target.value);
                 setSelectedProduct("");
+                setSelectedMg("");
               }}
             >
               <option value="">All</option>
@@ -197,9 +244,12 @@ export default function ProductsPage() {
               Product
             </label>
             <select
-              className="w-full  p-2 focus:ring-2 focus:ring-[#3386bc]"
+              className="w-full p-2 focus:ring-2 focus:ring-[#3386bc]"
               value={selectedProduct}
-              onChange={(e) => setSelectedProduct(e.target.value)}
+              onChange={(e) => {
+                setSelectedProduct(e.target.value);
+                setSelectedMg("");
+              }}
               disabled={!selectedCategory}
             >
               <option value="">All</option>
@@ -217,9 +267,10 @@ export default function ProductsPage() {
               Dosage Strength
             </label>
             <select
-              className="w-full  p-2 focus:ring-2 focus:ring-[#3386bc]"
+              className="w-full p-2 focus:ring-2 focus:ring-[#3386bc]"
               value={selectedMg}
               onChange={(e) => setSelectedMg(e.target.value)}
+              disabled={!selectedProduct}
             >
               <option value="">All</option>
               {mgOptions.map((mg) => (
@@ -247,14 +298,16 @@ export default function ProductsPage() {
                   transition={{ duration: 0.3 }}
                   className="transition-transform transform hover:-translate-y-1 hover:shadow-xl duration-300"
                 >
-                  <ProductCard
-                    product={{
-                      ...p,
-                      image:
-                        p.images?.[0] ||
-                        "https://via.placeholder.com/500x500?text=No+Image",
-                    }}
-                  />
+                  <Link to={detailUrl(p)}>
+                    <ProductCard
+                      product={{
+                        ...p,
+                        image:
+                          p.images?.[0] ||
+                          "https://via.placeholder.com/500x500?text=No+Image",
+                      }}
+                    />
+                  </Link>
                 </motion.div>
               ))}
             </div>

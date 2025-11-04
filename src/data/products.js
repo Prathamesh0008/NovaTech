@@ -1,27 +1,32 @@
 // src/data/products.js
 
-// === Dynamically import all product images ===
-const images = import.meta.glob("../assets/products/*.{jpg,jpeg,png,webp}", {
+// === Dynamically import ALL product images (including nested folders) ===
+const images = import.meta.glob("../assets/products/**/*.{jpg,jpeg,png,webp}", {
   eager: true,
 });
 
-// Helper function to get matching images even if names differ slightly (e.g., spaces, dashes)
-const getImages = (name) => {
+
+const getImages = (name, category) => {
+  if (!name) return [];
+
   const normalizedName = name
     .toLowerCase()
-    .replace(/\s+/g, "_")       // spaces → underscores
-    .replace(/[^a-z0-9_]/g, ""); // remove any other symbols
+    .replace(/\s+/g, "_") // replace spaces with underscores
+    .replace(/[^a-z0-9_]/g, ""); // strip unwanted chars
 
+  const normalizedCat = (category || "").toLowerCase();
+
+  // Match both category folder and normalized name
   const found = Object.keys(images)
-    .filter((k) => {
-      const file = k.toLowerCase().replace(/[^a-z0-9_]/g, "");
-      return file.includes(normalizedName);
+    .filter((key) => {
+      const cleanKey = key.toLowerCase().replace(/[^a-z0-9_/]/g, "");
+      return cleanKey.includes(normalizedName) && cleanKey.includes(normalizedCat);
     })
-    .map((k) => images[k].default);
+    .map((key) => images[key].default);
 
   if (found.length > 0) return found;
 
-  // fallback placeholders
+  // ✅ fallback placeholders
   return [
     "https://via.placeholder.com/500x500?text=Image+Coming+Soon",
     "https://via.placeholder.com/500x500?text=Image+Coming+Soon",
@@ -235,7 +240,7 @@ const injectables = [
     presentation: "10 ml vial, 100 mg/ml.",
   },
   {
-    name: "PRIMONOVA (Injectable)",
+    name: "PRIMONOVA_Ing",
     description: "METHENOLONE ENANTHATE 100 mg/ml",
     indication: "Long-acting anabolic used for recovery and strength.",
     presentation: "10 ml vial, 100 mg/ml.",
@@ -275,9 +280,17 @@ const injectables = [
 ];
 
 // === EXPORT MERGED PRODUCT LIST ===
-export const products = [...tablets, ...injectables].map((p, index) => ({
-  id: index + 1,
-  ...p,
-  images: getImages(p.name),
-  category: p.category || (index < tablets.length ? "Tablets" : "Injectables"),
-}));
+export const products = [
+  ...tablets.map((p) => ({
+    ...p,
+    id: `tab-${p.name}`,
+    category: "Tablets",
+    images: getImages(p.name, "tablets"),
+  })),
+  ...injectables.map((p) => ({
+    ...p,
+    id: `inj-${p.name}`,
+    category: "Injectables",
+    images: getImages(p.name, "injectables"),
+  })),
+];
