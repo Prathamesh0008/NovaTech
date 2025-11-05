@@ -14,7 +14,7 @@ import banner2 from "../assets/banners/gdrive2.jpg";
 import banner3 from "../assets/banners/banner3.jpg";
 import banner5 from "../assets/banners/banner5.jpg";
 import sbanner1 from "../assets/smallBanners/tablets.png"
-import sbanner2 from "../assets/smallBanners/injectable.png"
+import sbanner2 from "../assets/smallBanners/Injectable.png"
 
 
 // ✅ Animated Count Component
