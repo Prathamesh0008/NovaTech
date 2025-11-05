@@ -2,6 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Breadcrumbs from "../components/Breadcrumbs";
 import { Calendar, ArrowRight } from "lucide-react";
+import blog1 from '../assets/blogs/blog1.jpg'
+import blog2 from '../assets/blogs/blog2.jpg'
+import blog3 from '../assets/blogs/blog3.jpg'
+import blog4 from '../assets/blogs/blog1.jpg'
+
+
 
 export default function Blog() {
   const blogs = [
@@ -10,7 +16,7 @@ export default function Blog() {
       title: "Advancements in Hormone Replacement Therapy",
       date: "October 10, 2025",
       category: "Research & Development",
-      image: "https://images.unsplash.com/photo-1603398938378-e54d8a6b1a2b?auto=format&fit=crop&w=800&q=80",
+      image: blog1,
       excerpt:
         "Discover the latest breakthroughs in safe and effective hormone therapies for balanced wellness.",
     },
@@ -19,7 +25,7 @@ export default function Blog() {
       title: "Ensuring Quality in Pharmaceutical Manufacturing",
       date: "October 3, 2025",
       category: "Quality Control",
-      image: "https://images.unsplash.com/photo-1581093588401-22db0c4d6b33?auto=format&fit=crop&w=800&q=80",
+      image: blog2,
       excerpt:
         "How NovaTech maintains international WHO-GMP standards across every product line and facility.",
     },
@@ -28,7 +34,7 @@ export default function Blog() {
       title: "Sustainable Practices in Modern Pharma",
       date: "September 29, 2025",
       category: "Sustainability",
-      image: "https://images.unsplash.com/photo-1603190287605-e7c1c25c2a9f?auto=format&fit=crop&w=800&q=80",
+      image: blog3,
       excerpt:
         "Learn about our Zero Liquid Discharge initiatives and renewable energy integration in production.",
     },
@@ -37,7 +43,7 @@ export default function Blog() {
       title: "Steroid Manufacturing: Science & Safety",
       date: "September 21, 2025",
       category: "Pharmaceutical Insight",
-      image: "https://images.unsplash.com/photo-1580281658627-5e7e6f9a8f9c?auto=format&fit=crop&w=800&q=80",
+      image: blog4,
       excerpt:
         "Understanding purity, safety, and performance aspects of steroid formulations for regulated use.",
     },
@@ -46,7 +52,7 @@ export default function Blog() {
       title: "Pharmaceutical Exports from India to the EU",
       date: "September 14, 2025",
       category: "Global Trade",
-      image: "https://images.unsplash.com/photo-1562240020-ce31ccb0fa8c?auto=format&fit=crop&w=800&q=80",
+      image: blog1,
       excerpt:
         "An inside look into how NovaTech ensures compliance for international exports to Europe and CIS markets.",
     },
@@ -55,7 +61,7 @@ export default function Blog() {
       title: "Digital Authentication to Prevent Counterfeiting",
       date: "September 8, 2025",
       category: "Security & Technology",
-      image: "https://images.unsplash.com/photo-1640955014233-cc8a02901e76?auto=format&fit=crop&w=800&q=80",
+      image: blog2,
       excerpt:
         "Explore our digital product verification system designed to protect authenticity and consumer trust.",
     },
@@ -64,7 +70,7 @@ export default function Blog() {
       title: "Future of Nutraceuticals in Preventive Healthcare",
       date: "August 30, 2025",
       category: "Nutrition Science",
-      image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=800&q=80",
+      image: blog3,
       excerpt:
         "How science-backed nutraceuticals are shaping the future of preventive wellness and holistic care.",
     },
@@ -73,7 +79,7 @@ export default function Blog() {
       title: "Inside Our Sterile Injectable Unit",
       date: "August 20, 2025",
       category: "Manufacturing",
-      image: "https://images.unsplash.com/photo-1590003925119-270b1e537a6e?auto=format&fit=crop&w=800&q=80",
+      image: blog4,
       excerpt:
         "A behind-the-scenes view of the sterile production environment ensuring precision and product integrity.",
     },
@@ -82,7 +88,7 @@ export default function Blog() {
       title: "Why GMP Certification Matters",
       date: "August 10, 2025",
       category: "Compliance",
-      image: "https://images.unsplash.com/photo-1601043665409-3e57b68fbf12?auto=format&fit=crop&w=800&q=80",
+      image: blog1,
       excerpt:
         "Discover the international standards that ensure every NovaTech product meets global benchmarks.",
     },
@@ -91,7 +97,7 @@ export default function Blog() {
       title: "Women’s Health & Hormonal Balance",
       date: "August 1, 2025",
       category: "Healthcare",
-      image: "https://images.unsplash.com/photo-1601043665409-3e57b68fbf12?auto=format&fit=crop&w=800&q=80",
+      image: blog2,
       excerpt:
         "Our focus on hormonal therapies designed specifically to support women’s well-being and vitality.",
     },
