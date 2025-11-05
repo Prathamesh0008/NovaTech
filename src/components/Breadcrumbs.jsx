@@ -16,17 +16,10 @@ export default function Breadcrumbs() {
   const category = searchParams.get("category");
 
   const parts = location.pathname.split("/").filter(Boolean);
-  // Example:
-  // /               → []
-  // /products       → ["products"]
-  // /products/abc   → ["products", "abc"]
-
-  // ❌ If we are on home page, show nothing
   if (parts.length === 0) return null;
 
   const crumbs = [{ label: "HOME", to: "/" }];
 
-  // ✅ Only add "PRODUCTS" breadcrumb when the path actually starts with /products
   if (parts[0].toLowerCase() === "products") {
     crumbs.push({ label: "PRODUCTS", to: "/products" });
 
@@ -37,7 +30,6 @@ export default function Breadcrumbs() {
       });
     }
 
-    // If on a specific product details page
     if (parts.length > 1) {
       crumbs.push({
         label: cleanLabel(parts[1]),
@@ -45,7 +37,6 @@ export default function Breadcrumbs() {
       });
     }
   } else {
-    // ✅ For any other route like /about, /contact, etc.
     crumbs.push({
       label: cleanLabel(parts[0]).toUpperCase(),
       to: location.pathname,
@@ -53,24 +44,24 @@ export default function Breadcrumbs() {
   }
 
   return (
-    <div className="w-full bg-gradient-to-r from-[#0b1e39] via-[#18487d] to-[#3386bc] shadow-md py-4 px-6">
-      <nav className="max-w-7xl mx-auto flex justify-left">
-        <ol className="flex flex-wrap items-center text-sm md:text-base text-white gap-2 md:gap-3">
+    <div className="w-full bg-gradient-to-r from-[#0b1e39] via-[#18487d] to-[#3386bc] shadow-md py-3 sm:py-4 px-3 sm:px-6">
+      <nav className="max-w-7xl mx-auto">
+        <ol className="flex flex-wrap items-center gap-1 sm:gap-2 text-xs sm:text-sm md:text-base text-white">
           {crumbs.map((c, i) => {
             const isLast = i === crumbs.length - 1;
             return (
-              <li key={i} className="flex items-center">
+              <li key={i} className="flex items-center flex-shrink-0">
                 {i > 0 && (
-                  <ChevronRight className="w-4 h-4 text-white/70 mx-2" />
+                  <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 text-white/70 mx-1 sm:mx-2" />
                 )}
                 {isLast ? (
-                  <span className="px-4 py-2 bg-white/30 text-white font-semibold rounded-lg shadow-sm cursor-default backdrop-blur-md">
+                  <span className="px-2 sm:px-4 py-1 sm:py-2 bg-white/30 text-white font-semibold rounded-lg shadow-sm cursor-default backdrop-blur-md text-center">
                     {c.label}
                   </span>
                 ) : (
                   <Link
                     to={c.to}
-                    className="px-4 py-2 bg-white/15 text-white rounded-lg hover:bg-white/25 font-medium transition-all duration-200 backdrop-blur-md"
+                    className="px-2 sm:px-4 py-1 sm:py-2 bg-white/15 text-white rounded-lg hover:bg-white/25 font-medium transition-all duration-200 backdrop-blur-md truncate max-w-[120px] sm:max-w-none"
                   >
                     {c.label}
                   </Link>

@@ -53,7 +53,9 @@ export default function BannerSlider({ banners }) {
             />
 
             {/* ===== Subtle Overlay Gradient ===== */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0b1e39]/70 via-[#0b1e39]/40 to-transparent" />
+            <div className="absolute inset-0 " />
+            {/* <div className="absolute inset-0 bg-gradient-to-t from-[#0b1e39]/70 via-[#0b1e39]/40 to-transparent" /> */}
+
 
             {/* ===== Text & Buttons ===== */}
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-6">
@@ -61,7 +63,7 @@ export default function BannerSlider({ banners }) {
                 className="text-4xl md:text-6xl font-extrabold drop-shadow-lg mb-4 animate-fadeInUp"
                 style={{ animationDelay: "0.3s" }}
               >
-                {banner.title || "Welcome to Nova TechSciences"}
+                {banner.title || ""}
               </h1>
 
               <p
@@ -69,14 +71,14 @@ export default function BannerSlider({ banners }) {
                 style={{ animationDelay: "0.6s" }}
               >
                 {banner.subtitle ||
-                  "Empowering innovation in pharmaceuticals and medical technology."}
+                  ""}
               </p>
 
               <div
                 className="flex justify-center gap-4 mt-8 animate-fadeInUp"
                 style={{ animationDelay: "0.9s" }}
               >
-                <a
+                {/* <a
                   href="/products"
                   className="bg-gradient-to-r from-[#18487d] to-[#3386bc] text-white px-6 py-2 rounded-lg shadow-md hover:scale-110 hover:shadow-xl transition-all duration-500"
                 >
@@ -87,7 +89,7 @@ export default function BannerSlider({ banners }) {
                   className="bg-white/90 text-[#0b1e39] px-6 py-2 rounded-lg shadow-md hover:bg-white hover:scale-110 hover:shadow-xl transition-all duration-500"
                 >
                   Contact Us
-                </a>
+                </a> */}
               </div>
             </div>
           </div>

@@ -240,7 +240,7 @@ const injectables = [
     presentation: "10 ml vial, 100 mg/ml.",
   },
   {
-    name: "PRIMONOVA_Ing",
+    name: "PRIMONOVA",
     description: "METHENOLONE ENANTHATE 100 mg/ml",
     indication: "Long-acting anabolic used for recovery and strength.",
     presentation: "10 ml vial, 100 mg/ml.",

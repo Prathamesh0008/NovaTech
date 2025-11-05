@@ -82,14 +82,14 @@ export default function ContactUs() {
               <Mail className="w-5 h-5 text-[#3386bc]" />
               <span>support@novatechsciences.com</span>
             </div>
-            <div className="flex items-center gap-3 text-gray-700">
+            {/* <div className="flex items-center gap-3 text-gray-700">
               <Phone className="w-5 h-5 text-[#3386bc]" />
               <span>+91 98765 43210</span>
             </div>
             <div className="flex items-center gap-3 text-gray-700">
               <MapPin className="w-5 h-5 text-[#3386bc]" />
               <span>Navi Mumbai, Maharashtra, India</span>
-            </div>
+            </div> */}
           </div>
         </div>
 

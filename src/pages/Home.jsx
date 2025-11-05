@@ -9,12 +9,12 @@ import CategoryCard from "../components/CategoryCard";
 import HeroSection from "../components/HeroSection";
 import DiseaseFeaturedSection from "../components/DiseaseFeaturedSection";
 import BannerSlider from "../components/BannerSlider";
-import banner1 from "../assets/banners/gdrive1.png";
+import banner1 from "../assets/banners/banner-4.png";
 import banner2 from "../assets/banners/gdrive2.jpg";
-import banner3 from "../assets/banners/banner3.jpg";
-import banner5 from "../assets/banners/banner5.jpg";
-import sbanner1 from "../assets/smallBanners/tablets.png"
-import sbanner2 from "../assets/smallBanners/Injectable.png"
+import banner3 from "../assets/banners/banner3.png";
+import banner5 from "../assets/banners/gdrive1.png";
+import sbanner1 from "../assets/smallBanners/Tablets-box.png"
+import sbanner2 from "../assets/smallBanners/Injectable-box.png"
 
 
 // ✅ Animated Count Component
@@ -52,7 +52,7 @@ function StatsSection() {
   }, [inView, controls]);
 
   const stats = [
-    { num: 10, text: "Countries Served", suffix: "+" },
+    { num: 40, text: "Countries Served", suffix: "+" },
     { num: 200, text: "Products Formulated", suffix: "+" },
     { num: 15, text: "Therapeutic Segments", suffix: "+" },
     { num: 100, text: "Quality Commitment", suffix: "%" },
@@ -97,11 +97,11 @@ export default function Home() {
   ];
 
   const banners = [
-    { image: banner1, alt: "Health Concern", title: "Your Health, Our Priority" },
-    { image: banner2, alt: "Medicine Banner", title: "World Class Medicines" },
-    { image: banner3, alt: "Medical Banner", title: "Trusted Healthcare Solutions" },
-    { image: banner1, alt: "Health Care", title: "Caring for You Always" },
-    { image: banner5, alt: "Medical Banner", title: "Trusted Healthcare Solutions" },
+    { image: banner1, alt: ""},
+    { image: banner2, alt: "Medicine Banner", subtitle:"Healthcare Excellence",  title: "Advancing Global Wellness" },
+    { image: banner3, alt: "Medical Banner", subtitle:"Modern Laboratory", title: "Where Science Meets Care" },
+    // { image: banner1, alt: "Health Care", subtitle:"Medical Research", title: "Innovating for a Healthier Tomorrow" },
+    { image: banner5, alt: "Medical Banner", subtitle:"Global Medicine Network", title: "Delivering Excellence Across Continents" },
 
   ];
 

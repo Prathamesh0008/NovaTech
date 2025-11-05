@@ -69,7 +69,10 @@ const getProductImages = (name, category) => {
 
 export default function ProductDetails() {
   const { id } = useParams();
-  const product = products.find((p) => p.id === id || p.id === parseInt(id));
+  const product = products.find(
+  (p) => String(p.id) === String(id)
+);
+
 
   const productImages = useMemo(
     () => (product ? getProductImages(product.name, product.category) : []),
@@ -90,8 +93,16 @@ export default function ProductDetails() {
   }
 
   const related = products
-    .filter((p) => p.category === product.category && p.name !== product.name)
-    .slice(0, 4);
+  .filter(
+    (p) =>
+      p.category?.toLowerCase() === product.category?.toLowerCase() &&
+      p.name !== product.name
+  )
+  .slice(0, 4);
+  console.log("Related found:", related);
+
+
+
 
   const faqs = [
     {

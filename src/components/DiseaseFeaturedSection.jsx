@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { products } from "../data/products";
 import ProductCard from "./ProductCard";
+import tabletdiv from '../assets/divisions/tabletdiv.png'
+import injectdiv from '../assets/divisions/injectdiv.png'
+
 
 export default function DiseaseFeaturedSection() {
   const navigate = useNavigate();
@@ -12,13 +15,13 @@ export default function DiseaseFeaturedSection() {
       key: "Tablets",
       name: "Tablets Division",
       description: "High-precision oral formulations designed for strength, stability, and purity.",
-      image: "/assets/banners/tablets.jpg",
+      image: tabletdiv,
     },
     {
       key: "Injectables",
       name: "Injectables Division",
       description: "Sterile and controlled injectables ensuring rapid bioavailability and efficacy.",
-      image: "/assets/banners/injectables.jpg",
+      image: injectdiv,
     },
   ];
 
@@ -89,12 +92,12 @@ export default function DiseaseFeaturedSection() {
           className="w-full h-72 object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent flex flex-col justify-end p-6">
-          <h3 className="text-2xl font-bold text-white">
+          {/* <h3 className="text-2xl font-bold text-white">
             {categories.find((c) => c.key === selected)?.name}
-          </h3>
-          <p className="text-gray-200 text-sm max-w-lg">
+          </h3> */}
+          {/* <p className="text-gray-200 text-sm max-w-lg">
             {categories.find((c) => c.key === selected)?.description}
-          </p>
+          </p> */}
         </div>
       </div>
 
