@@ -45,7 +45,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-20">
         {/* ✅ Dynamic Logo */}
-        <div className="flex items-center">
+        <div className="flex items-center" onClick={() => (window.location.href = "/")}>
           <div className="relative w-[170px] h-[48px] flex items-center justify-center">
             {/* Base transparent wrapper keeps size constant */}
             <img

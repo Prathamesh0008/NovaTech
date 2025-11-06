@@ -97,11 +97,12 @@ export default function Home() {
   ];
 
   const banners = [
-    { image: banner1, alt: ""},
-    { image: banner2, alt: "Medicine Banner", subtitle:"Healthcare Excellence",  title: "Advancing Global Wellness" },
-    { image: banner3, alt: "Medical Banner", subtitle:"Modern Laboratory", title: "Where Science Meets Care" },
-    // { image: banner1, alt: "Health Care", subtitle:"Medical Research", title: "Innovating for a Healthier Tomorrow" },
-    { image: banner5, alt: "Medical Banner", subtitle:"Global Medicine Network", title: "Delivering Excellence Across Continents" },
+    { image: banner1, alt: "", subtitle: "", title: ["Precision Purity", "Progress"], position: "left" },
+
+    { image: banner2, alt: "Medicine Banner", subtitle:"Healthcare Excellence",  title: "Advancing Global Wellness", position: "bottom" },
+    { image: banner3, alt: "Medical Banner", subtitle:"Modern Laboratory", title: "Where Science Meets Care", position: "top" },
+    // { image: banner1, alt: "Health Care", subtitle:"Medical Research", title: "Innovating for a Healthier Tomorrow" , position: "bottom" },
+    { image: banner5, alt: "Medical Banner", subtitle:"Global Medicine Network", title: "Delivering Excellence Across Continents", position: "right"  },
 
   ];
 

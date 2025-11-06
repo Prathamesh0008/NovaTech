@@ -2,6 +2,10 @@ import React from "react";
 import { useParams, Link } from "react-router-dom";
 import Breadcrumbs from "../components/Breadcrumbs";
 import { Calendar } from "lucide-react";
+import blog1 from '../assets/blogs/blog1.jpg'
+import blog2 from '../assets/blogs/blog2.jpg'
+import blog3 from '../assets/blogs/blog3.jpg'
+import blog4 from '../assets/blogs/blog1.jpg'
 
 // --- SAME BLOG LIST as on main blog page ---
 const blogData = [
@@ -10,7 +14,7 @@ const blogData = [
     title: "Advancements in Hormone Replacement Therapy",
     date: "October 10, 2025",
     category: "Research & Development",
-    image: "/images/blog/hormone-therapy.jpg",
+    image: blog1,
     content: `
       Hormone replacement therapy (HRT) has come a long way in recent years.
       With advanced research in molecular biology, formulation precision,
@@ -24,7 +28,7 @@ const blogData = [
     title: "Ensuring Quality in Pharmaceutical Manufacturing",
     date: "October 3, 2025",
     category: "Quality Control",
-    image: "/images/blog/pharma-quality-assurance.jpg",
+    image: blog2,
     content: `
       Quality assurance lies at the heart of NovaTech’s operations.
       Our WHO-GMP certified facilities follow stringent SOPs, regular audits,
@@ -37,7 +41,7 @@ const blogData = [
     title: "Sustainable Practices in Modern Pharma",
     date: "September 29, 2025",
     category: "Sustainability",
-    image: "/images/blog/eco-sustainability-lab.jpg",
+    image: blog3,
     content: `
       Sustainability is not an option—it's a responsibility.
       NovaTech integrates renewable energy systems, water recycling,

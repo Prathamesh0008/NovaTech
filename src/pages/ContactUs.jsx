@@ -80,7 +80,7 @@ export default function ContactUs() {
           <div className="space-y-4 mt-6">
             <div className="flex items-center gap-3 text-gray-700">
               <Mail className="w-5 h-5 text-[#3386bc]" />
-              <span>support@novatechsciences.com</span>
+              <span>info@novatechsciences.com</span>
             </div>
             {/* <div className="flex items-center gap-3 text-gray-700">
               <Phone className="w-5 h-5 text-[#3386bc]" />
