@@ -25,11 +25,11 @@ export default function ProductCard({ product }) {
     >
       {/* === Image Area === */}
       <div className="w-full h-44 pr-1.5 overflow-hidden mb-3 flex-shrink-0 relative bg-white">
-        {/* {loading && (
+        {loading && (
           <div className="absolute inset-0 flex items-center justify-center bg-white/40 backdrop-blur-sm">
             <div className="w-6 h-6 border-4 border-[#18487d] border-t-[#3386bc] rounded-full animate-spin"></div>
           </div>
-        )} */}
+        )}
 
         <img
           src={image}
@@ -48,6 +48,7 @@ export default function ProductCard({ product }) {
           <h3 className="text-base sm:text-lg font-semibold text-gray-800">
             {product.name}
           </h3>
+          
           {/* <p className="text-gray-500 text-sm mt-1">
             {product.description || product.indication}
           </p> */}

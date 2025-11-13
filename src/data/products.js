@@ -34,6 +34,50 @@ const getImages = (name, category) => {
   ];
 };
 
+// === CAS NUMBER MAP ===
+const CAS = {
+  FEMANOVA: "112809-51-5",
+  TAMONOVA: "54965-24-1",
+  NOVAZOLE: "120511-73-1",
+  AROMANOVA: "107868-30-4",
+  ENCLOMINOVA: "7599-79-3",
+  PRIMONOVA_TABLET: "0434-05-09",
+  SUPERNOVA: "3381-88-2",
+  TELINOVA: "144701-48-4",
+  TURINOVA: "2446-23-3",
+  NOVA_T4: "55-03-8",
+  CABERNOVA: "81409-90-7",
+  HALONOVA: "76-43-7",
+  NOVA_T3: "55-06-1",
+  NOVABOL: "53-39-4",
+  PROVINOVA: "1424-00-6",
+  OXYDROL: "0434-07-01",
+  NOVAMOREN: "159752-10-0",
+  NOVAMETH: "72-63-9",
+  SPIROCLEN: "21898-19-1",
+  STANOVA50: "10418-03-08",
+  STANOVA10: "10418-03-08",
+  CLOMINOVA: "50-41-9",
+
+  // Injectables
+  "TESTOVA P": "57-85-2",
+  SUSTOVA: "68924-89-0",
+  "TESTOVA C": "58-20-8",
+  "TESTOVA E": "315-37-7",
+  BOLDENOVA: "13103-34-9",
+  "NANDROVA D": "360-70-3",
+  "NANDROVA P": "62-90-8",
+  "TRENOVA A": "10161-34-9",
+  "TRENOVA E": "10161-33-8",
+  TRENOVAHEXA: "23454-33-3",
+  "DROSTANOVA P": "521-12-0",
+  PRIMONOVA_INJ: "303-42-4",
+  ROXONOVA: "10418-03-08",
+  "TESTOVA PP": "1255-49-8",
+  "TESTOVA BASE": "58-22-0",
+};
+
+
 
 // === TABLETS ===
 const tablets = [
@@ -285,12 +329,15 @@ export const products = [
     ...p,
     id: `tab-${p.name}`,
     category: "Tablets",
+    cas: CAS[p.name] || CAS[p.name.replace(/\s/g, "")] || null,
     images: getImages(p.name, "tablets"),
   })),
+
   ...injectables.map((p) => ({
     ...p,
     id: `inj-${p.name}`,
     category: "Injectables",
+    cas: CAS[p.name] || CAS[p.name.replace(/\s/g, "")] || null,
     images: getImages(p.name, "injectables"),
   })),
 ];

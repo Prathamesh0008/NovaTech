@@ -146,6 +146,7 @@ export default function ProductDetails() {
           {/* LEFT - Image Gallery */}
           <div className="md:w-1/2">
             <ZoomImage src={selectedImage} alt={product.name} />
+            
             <div className="flex gap-3 mt-4 justify-center flex-wrap">
               {productImages.map((img, idx) => (
                 <div
@@ -173,6 +174,8 @@ export default function ProductDetails() {
             <p className="text-gray-600 leading-relaxed">
               {product.shortDescription || product.description}
             </p>
+            <p><strong>CAS Number:</strong> {product.cas}</p>
+
 
             <div className="flex gap-4 mt-8 border-b border-gray-300">
               {["indication", "presentation"].map((tab) => (
