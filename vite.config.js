@@ -1,19 +1,23 @@
-import { defineConfig } from 'vite'
-import tailwindcss from '@tailwindcss/vite'
-import fs from 'fs'   // <-- REQUIRED
+import { defineConfig } from "vite";
+import tailwindcss from "@tailwindcss/vite";
+import fs from "fs";
 
 export default defineConfig({
   plugins: [
     tailwindcss(),
-
-    // Plugin to copy .htaccess after build
     {
       name: "copy-htaccess",
       closeBundle() {
-        fs.copyFileSync(".htaccess", "dist/.htaccess");
-      }
-    }
-  ],
+        const src = "public/.htaccess";     // << correct location
+        const dest = "dist/.htaccess";
 
-  base: "/",
+        if (fs.existsSync(src)) {
+          fs.copyFileSync(src, dest);
+          console.log("✔ .htaccess copied to dist/");
+        } else {
+          console.warn("⚠ .htaccess NOT FOUND in public/");
+        }
+      },
+    },
+  ],
 });
