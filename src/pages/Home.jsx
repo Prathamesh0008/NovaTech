@@ -13,7 +13,7 @@ import BannerSlider from "../components/BannerSlider";
 import banner1 from "../assets/banners/2.jpg";
 import banner2 from "../assets/banners/3.jpg";
 import banner3 from "../assets/banners/4.jpg";
-import banner5 from "../assets/banners/5.jpg";
+import banner5 from "../assets/banners/1.jpg";
 import sbanner1 from "../assets/smallBanners/Tablets-box.png"
 import sbanner2 from "../assets/smallBanners/Injectable-box.png"
 import { handleCtrlClick } from "../utils/openInNewTab";   // <-- NEW
