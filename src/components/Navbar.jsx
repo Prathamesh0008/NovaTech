@@ -2,8 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { HiMenu, HiX } from "react-icons/hi";
-import logoDark from "../assets/nova_new-removebg-preview.png"; // normal logo
-import logoLight from "../assets/logo_footer.png"; // white/transparent logo
+import logoDark from "../assets/nova_new-removebg-preview.png";
+import logoLight from "../assets/logo_footer.png";
+import { handleCtrlClick } from "../utils/openInNewTab";   // <-- NEW
 
 const links = [
   { name: "Home", path: "/" },
@@ -35,8 +36,6 @@ export default function Navbar() {
     }
   }, [location.pathname]);
 
-  const currentLogo = scrolled || menuOpen ? logoLight : logoDark;
-
   return (
     <nav
       className={`fixed w-full top-0 left-0 z-50 shadow-md transition-colors duration-500 ${
@@ -44,10 +43,18 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-20">
-        {/* ✅ Dynamic Logo */}
-        <div className="flex items-center" onClick={() => (window.location.href = "/")}>
+        
+        {/* LOGO */}
+        <div
+          className="flex items-center cursor-pointer"
+          onClick={(e) => {
+            handleCtrlClick(e, "/");
+            if (!e.ctrlKey && !e.metaKey && e.button !== 1) {
+              window.location.href = "/";
+            }
+          }}
+        >
           <div className="relative w-[170px] h-[48px] flex items-center justify-center">
-            {/* Base transparent wrapper keeps size constant */}
             <img
               src={logoDark}
               alt="NovaTech dark logo"
@@ -65,7 +72,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* ✅ Desktop Links */}
+        {/* DESKTOP LINKS */}
         <div className="hidden md:flex flex-1 justify-center relative">
           <div className="flex space-x-6 relative">
             {links.map((link, idx) => (
@@ -73,6 +80,7 @@ export default function Navbar() {
                 key={link.name}
                 to={link.path}
                 ref={(el) => (linkRefs.current[idx] = el)}
+                onClick={(e) => handleCtrlClick(e, link.path)}  // <-- CTRL CLICK
                 className={({ isActive }) =>
                   `relative font-medium transition-transform duration-300 transform hover:scale-105 ${
                     scrolled
@@ -85,6 +93,7 @@ export default function Navbar() {
               </NavLink>
             ))}
 
+            {/* UNDERLINE */}
             <motion.div
               className={`absolute bottom-0 h-0.5 rounded-full ${
                 scrolled ? "bg-[#4bb2e5]" : "bg-[#314977]"
@@ -101,36 +110,22 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* ✅ Hamburger */}
+        {/* MOBILE MENU BUTTON */}
         <div className="md:hidden flex items-center">
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="transition-colors duration-300"
-          >
+          <button onClick={() => setMenuOpen(!menuOpen)} className="transition-colors duration-300">
             {menuOpen ? (
-              <HiX
-                className={`w-7 h-7 ${
-                  scrolled || menuOpen ? "text-white" : "text-gray-800"
-                }`}
-              />
+              <HiX className={`w-7 h-7 ${scrolled || menuOpen ? "text-white" : "text-gray-800"}`} />
             ) : (
-              <HiMenu
-                className={`w-7 h-7 ${
-                  scrolled ? "text-white" : "text-gray-800"
-                }`}
-              />
+              <HiMenu className={`w-7 h-7 ${scrolled ? "text-white" : "text-gray-800"}`} />
             )}
           </button>
         </div>
       </div>
 
-      {/* ✅ Mobile Dropdown */}
+      {/* MOBILE DROPDOWN */}
       <motion.div
         initial={{ height: 0, opacity: 0 }}
-        animate={{
-          height: menuOpen ? "auto" : 0,
-          opacity: menuOpen ? 1 : 0,
-        }}
+        animate={{ height: menuOpen ? "auto" : 0, opacity: menuOpen ? 1 : 0 }}
         transition={{ duration: 0.4 }}
         className={`overflow-hidden md:hidden shadow-lg border-t ${
           scrolled || menuOpen
@@ -143,7 +138,10 @@ export default function Navbar() {
             <NavLink
               key={link.name}
               to={link.path}
-              onClick={() => setMenuOpen(false)}
+              onClick={(e) => {
+                handleCtrlClick(e, link.path);  
+                if (!e.ctrlKey) setMenuOpen(false);
+              }}
               className={({ isActive }) =>
                 `w-full text-center font-medium transition-all duration-300 py-2 ${
                   scrolled || menuOpen
@@ -155,19 +153,6 @@ export default function Navbar() {
               {link.name}
             </NavLink>
           ))}
-
-          <div className="mt-3 border-t border-gray-700/40 w-full" />
-          <NavLink
-            to="/contact"
-            onClick={() => setMenuOpen(false)}
-            className={`px-5 py-2 rounded-md font-semibold transition-all ${
-              scrolled || menuOpen
-                ? "bg-[#3386bc] text-white hover:bg-[#4bb2e5]"
-                : "bg-[#18487d] text-white hover:bg-[#3386bc]"
-            }`}
-          >
-            Contact Us
-          </NavLink>
         </div>
       </motion.div>
     </nav>

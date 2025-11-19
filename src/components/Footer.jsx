@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
 import { FaFacebook, FaInstagram, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import logo from "../assets/logo_footer.png";
+import { handleCtrlClick } from "../utils/openInNewTab";   // <-- NEW
+
 
 export default function Footer() {
   const links = [
@@ -39,15 +41,14 @@ export default function Footer() {
         </div>
 
         {/* Column 2 - Quick Links */}
-        <div>
-          <h3 className="font-semibold text-lg mb-3 text-[#b2e3e1]">
-            Quick Links
-          </h3>
+         <div>
+          <h3 className="font-semibold text-lg mb-3 text-[#b2e3e1]">Quick Links</h3>
           <ul className="space-y-2">
             {links.map((link) => (
               <li key={link.name}>
                 <NavLink
                   to={link.path}
+                  onClick={(e) => handleCtrlClick(e, link.path)}  // <-- ADDED
                   className="relative text-gray-200 hover:text-white transition-colors duration-300 group"
                 >
                   {link.name}
@@ -66,7 +67,7 @@ export default function Footer() {
           <p className="text-sm text-gray-200 mb-3">
             Get the latest news, research insights, and new product launches directly in your inbox.
           </p>
-          <form
+          {/* <form
             onSubmit={(e) => e.preventDefault()}
             className="flex items-center bg-white rounded-full overflow-hidden focus-within:ring-2 focus-within:ring-[#4bb2e5] transition"
           >
@@ -82,7 +83,7 @@ export default function Footer() {
             >
               <FaEnvelope size={16} /> Send
             </button>
-          </form>
+          </form> */}
         </div>
 
         {/* Column 4 - Social Links */}

@@ -11,6 +11,7 @@ import Blog from "./pages/Blog";
 import ProductDetails from "./pages/ProductDetails";
 import BlogDetails from "./pages/BlogDetails";
 import ScrollToTop from "./components/ScrollToTop";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -19,16 +20,20 @@ function App() {
       <Navbar />
       <div className="pt-15">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<AboutUs />} />
-          <Route path="/products" element={<OurProducts />} />
-          <Route path="/products/:id" element={<ProductDetails />} />
-          <Route path="/anti-counterfeit" element={<AntiCounterfeit />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:id" element= {<BlogDetails/>}/>
-
-          <Route path="/Contact" element={<ContactUs />} />
-        </Routes>
+  <Route path="/" element={<Home />} />
+  <Route path="/about" element={<AboutUs />} />
+  {/* PRODUCTS LIST PAGE */}
+  <Route path="/products" element={<OurProducts />} />
+  {/* CATEGORY PAGE (optional but recommended) */}
+  <Route path="/products/:category" element={<OurProducts />} />
+  {/* NEW SEO PRODUCT DETAIL PAGE */}
+  <Route path="/products/:category/:productSlug" element={<ProductDetails />} />
+  <Route path="/anti-counterfeit" element={<AntiCounterfeit />} />
+  <Route path="/blog" element={<Blog />} />
+  <Route path="/blog/:id" element={<BlogDetails />} />
+  <Route path="/contact" element={<ContactUs />} />
+  <Route path="*" element={<NotFound />} />
+</Routes>
       </div>
       <Footer />
     </Router>

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { motion, useAnimation } from "framer-motion";
@@ -9,12 +10,16 @@ import CategoryCard from "../components/CategoryCard";
 import HeroSection from "../components/HeroSection";
 import DiseaseFeaturedSection from "../components/DiseaseFeaturedSection";
 import BannerSlider from "../components/BannerSlider";
-import banner1 from "../assets/banners/banner-4.png";
-import banner2 from "../assets/banners/gdrive2.jpg";
-import banner3 from "../assets/banners/banner3.png";
-import banner5 from "../assets/banners/gdrive1.png";
+import banner1 from "../assets/banners/2.jpg";
+import banner2 from "../assets/banners/3.jpg";
+import banner3 from "../assets/banners/4.jpg";
+import banner5 from "../assets/banners/5.jpg";
 import sbanner1 from "../assets/smallBanners/Tablets-box.png"
 import sbanner2 from "../assets/smallBanners/Injectable-box.png"
+import { handleCtrlClick } from "../utils/openInNewTab";   // <-- NEW
+import { useNavigate } from "react-router-dom";
+
+
 
 
 // ✅ Animated Count Component
@@ -84,6 +89,8 @@ function StatsSection() {
 
 // ✅ Main Home Component
 export default function Home() {
+  const navigate = useNavigate();
+
   useEffect(() => {
     AOS.init({ duration: 800 });
   }, []);
@@ -96,15 +103,40 @@ export default function Home() {
     { name: "BP", image: "/images/bp.jpg", link: "/products" },
   ];
 
-  const banners = [
-    { image: banner1, alt: "", subtitle: "", title: ["Precision Purity", "Progress"], position: "left" },
+ const banners = [
+  { 
+    image: banner1, 
+    alt: "", 
+    subtitle: "", 
+    // title: ["Precision Purity", "Progress"], 
+    position: "left" 
+  },
 
-    { image: banner2, alt: "Medicine Banner", subtitle:"Healthcare Excellence",  title: "Advancing Global Wellness", position: "bottom" },
-    { image: banner3, alt: "Medical Banner", subtitle:"Modern Laboratory", title: "Where Science Meets Care", position: "top" },
-    // { image: banner1, alt: "Health Care", subtitle:"Medical Research", title: "Innovating for a Healthier Tomorrow" , position: "bottom" },
-    { image: banner5, alt: "Medical Banner", subtitle:"Global Medicine Network", title: "Delivering Excellence Across Continents", position: "right"  },
+  { 
+    image: banner2, 
+    alt: "Medicine Banner", 
+    // subtitle:"Healthcare Excellence",  
+    // title: "Advancing Global Wellness", 
+    position: "right" 
+  },
 
-  ];
+  { 
+    image: banner3, 
+    alt: "Medical Banner", 
+    // subtitle:"Modern Laboratory", 
+    // title: "Where Science Meets Care", 
+    position: "bottom" 
+  },
+
+  { 
+    image: banner5, 
+    alt: "Medical Banner", 
+    // subtitle:"Global Medicine Network", 
+    // title: "Delivering Excellence Across Continents", 
+    position: "right"  
+  },
+];
+
 
   return (
     <>
@@ -123,18 +155,32 @@ export default function Home() {
             to help you live healthier and stronger every day.
           </p>
           <div className="flex justify-center gap-4">
-            <a
-              href="/products"
-              className="bg-[#314977] text-white px-6 py-3 rounded-lg shadow-md hover:bg-[#0d1b4b] hover:scale-105 transition-all duration-300"
-            >
-              Explore Products
-            </a>
-            <a
-              href="/contact"
-              className="bg-[#3386bc] text-white px-6 py-3 rounded-lg shadow-md hover:bg-[#4bb2e5] hover:scale-105 transition-all duration-300"
-            >
-              Contact Us
-            </a>
+            <Link
+  to="/products"
+  onClick={(e) => {
+    if (e.ctrlKey || e.metaKey) {
+      window.open("/products", "_blank");
+      return;
+    }
+  }}
+  className="bg-[#314977] text-white px-6 py-3 rounded-lg shadow-md hover:bg-[#0d1b4b] hover:scale-105 transition-all duration-300"
+>
+  Explore Products
+</Link>
+
+
+<Link
+  to="/contact"
+  onClick={(e) => {
+    if (e.ctrlKey || e.metaKey) {
+      window.open("/contact", "_blank");
+      return;
+    }
+  }}
+  className="bg-[#3386bc] text-white px-6 py-3 rounded-lg shadow-md hover:bg-[#4bb2e5] hover:scale-105 transition-all duration-300"
+>
+  Contact Us
+</Link>
           </div>
         </section>
 
@@ -195,11 +241,15 @@ export default function Home() {
       />
       <div className="absolute inset-0 bg-[#18487d]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
         <a
-          href="/products?category=Tablets"
-          className="bg-white text-[#18487d] px-6 py-2 rounded-lg font-semibold shadow-md hover:bg-[#e6f3fa] transition-all"
-        >
-          Explore Tablets
-        </a>
+  onClick={(e) => {
+    if (handleCtrlClick(e, "/products/tablets")) return; // CTRL + click works
+    navigate("/products/tablets"); // normal click works
+  }}
+  className="bg-white text-[#18487d] px-6 py-2 rounded-lg font-semibold shadow-md hover:bg-[#e6f3fa] transition-all"
+>
+  Explore Tablets
+</a>
+
       </div>
       <div className="p-6 text-center">
         <h3 className="text-2xl font-bold text-[#18487d] mb-2">Tablets Division</h3>
@@ -225,11 +275,15 @@ export default function Home() {
       />
       <div className="absolute inset-0 bg-[#3386bc]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
         <a
-          href="/products?category=Injectables"
-          className="bg-white text-[#3386bc] px-6 py-2 rounded-lg font-semibold shadow-md hover:bg-[#e6f4fa] transition-all"
-        >
-          Explore Injectables
-        </a>
+  onClick={(e) => {
+    if (handleCtrlClick(e, "/products/injectables")) return;
+    navigate("/products/injectables");
+  }}
+  className="bg-white text-[#3386bc] px-6 py-2 rounded-lg font-semibold shadow-md hover:bg-[#e6f4fa] transition-all"
+>
+  Explore Injectables
+</a>
+
       </div>
       <div className="p-6 text-center">
         <h3 className="text-2xl font-bold text-[#3386bc] mb-2">Injectables Division</h3>
@@ -302,6 +356,12 @@ export default function Home() {
           </p>
           <a
             href="/contact"
+            onClick={(e) => {
+    if (e.ctrlKey || e.metaKey) {
+      window.open("/contact", "_blank");
+      return;
+    }
+  }}
             className="bg-white text-[#314977] font-semibold px-8 py-3 rounded-lg shadow-md hover:bg-gray-100 transition-all duration-300"
           >
             Get in Touch

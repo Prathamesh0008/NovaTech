@@ -65,7 +65,7 @@ export default function BlogDetails() {
     );
   }
 
-  const related = blogData.filter((b) => b.id !== blog.id).slice(0, 3);
+  const related = blogData.filter((b) => b.id !== blog.id).slice(0, 4);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#f5f9fb] via-[#f3f8fa] to-[#e8f3f8]">
@@ -114,6 +114,12 @@ export default function BlogDetails() {
             <Link
               key={b.id}
               to={`/blog/${b.id}`}
+               onClick={(e) => {
+    if (e.ctrlKey || e.metaKey) {
+      window.open(`/blog/${b.id}`, "_blank");
+      return;
+    }
+  }}
               className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
             >
               <img

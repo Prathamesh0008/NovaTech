@@ -153,6 +153,12 @@ export default function Blog() {
 
                 <Link
                   to={`/blog/${blog.id}`}
+                  onClick={(e) => {
+    if (e.ctrlKey || e.metaKey) {
+      window.open(`/blog/${blog.id}`, "_blank");
+      return;
+    }
+  }}
                   className="inline-flex items-center text-[#3386bc] font-medium hover:underline hover:gap-2 transition-all duration-300"
                 >
                   Read More <ArrowRight className="ml-1 w-4 h-4" />

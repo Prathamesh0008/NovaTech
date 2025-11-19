@@ -6,11 +6,14 @@ import ProductCard from "../components/ProductCard";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Download } from "lucide-react";
 import catalogue from "/src/assets/catalogue/Catalogue.pdf";
+import { handleCtrlClick } from "../utils/openInNewTab";   // <-- ADDED
+
 
 // === Zoom effect (no popup) ===
 function ZoomImage({ src, alt }) {
   const [pos, setPos] = useState({ x: 50, y: 50 });
   const [zoom, setZoom] = useState(false);
+  
 
   const handleMove = (e) => {
     const { left, top, width, height } = e.target.getBoundingClientRect();
@@ -68,11 +71,22 @@ const getProductImages = (name, category) => {
 };
 
 export default function ProductDetails() {
-  const { id } = useParams();
-  const product = products.find(
-  (p) => String(p.id) === String(id)
-);
+  // GET PARAMS FROM URL
+const { category, productSlug } = useParams();
 
+// Convert product name to slug (same as ProductsPage)
+const slugify = (name) =>
+  name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+// Find the matching product
+const product = products.find(
+  (p) =>
+    p.category?.toLowerCase() === category?.toLowerCase() &&
+    slugify(p.name) === productSlug
+);
 
   const productImages = useMemo(
     () => (product ? getProductImages(product.name, product.category) : []),
@@ -152,7 +166,7 @@ export default function ProductDetails() {
                 <div
                   key={idx}
                   onClick={() => setSelectedImage(img)}
-                  className={`w-24 h-24 border rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ${
+                  className={`w-34 h-28 border rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ${
                     selectedImage === img
                       ? "border-[#3386bc] ring-2 ring-[#3386bc]/40"
                       : "border-gray-300"
@@ -161,7 +175,7 @@ export default function ProductDetails() {
                   <img
                     src={img}
                     alt={`${product.name} thumbnail ${idx + 1}`}
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full object-contain hover:scale-110 transition-transform duration-500"
                   />
                 </div>
               ))}
@@ -205,6 +219,12 @@ export default function ProductDetails() {
             <div className="mt-6 flex flex-wrap gap-4">
               <Link
                 to="/contact"
+                onClick={(e) => {
+    if (e.ctrlKey || e.metaKey) {
+      window.open("/contact", "_blank");
+      return;
+    }
+  }}
                 className="bg-[#3386bc] text-white px-8 py-3 rounded-lg shadow-md hover:bg-[#4bb2e5] hover:scale-105 transition-all"
               >
                 Enquire Now
@@ -292,8 +312,11 @@ export default function ProductDetails() {
             <h2 className="text-2xl font-bold text-gray-800 mb-6">Related Products</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {related.map((p) => (
-                <ProductCard key={p.id} product={p} />
-              ))}
+  <Link to={`/products/${category}/${slugify(p.name)}`}>
+    <ProductCard key={p.id} product={p} />
+  </Link>
+))}
+
             </div>
           </section>
         )}

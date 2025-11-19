@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { handleCtrlClick } from "../utils/openInNewTab";   // <-- ADDED
 
 export default function ProductCard({ product }) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
 
-  const handleClick = () => {
-    navigate(
-      `/products/${product.id}?category=${encodeURIComponent(
-        product.category || ""
-      )}`
-    );
+  const productURL = (`/products/${product.category.toLowerCase()}/${product.slug}`);
+
+  const handleClick = (e) => {
+    // ✅ CTRL + Click OR CMD + Click OR Middle Mouse → Open in new tab
+    if (handleCtrlClick(e, productURL)) return;
+
+    // ✅ Normal navigation
+    navigate(productURL);
   };
 
-  // ✅ Use first image or fallback
+  // Use first image or fallback
   const image =
     product.images?.[0] ||
     "https://via.placeholder.com/500x500?text=Image+Coming+Soon";
@@ -21,7 +24,7 @@ export default function ProductCard({ product }) {
   return (
     <div
       onClick={handleClick}
-      className="flex flex-col bg-white shadow-sm hover:shadow-lg transition-all p-4 text-center h-full cursor-pointer overflow-hidden  hover:scale-[1.02] duration-300 border border-gray-100"
+      className="flex flex-col bg-white shadow-sm hover:shadow-lg transition-all p-4 text-center h-full cursor-pointer overflow-hidden hover:scale-[1.02] duration-300 border border-gray-100"
     >
       {/* === Image Area === */}
       <div className="w-full h-44 pr-1.5 overflow-hidden mb-3 flex-shrink-0 relative bg-white">
@@ -48,13 +51,6 @@ export default function ProductCard({ product }) {
           <h3 className="text-base sm:text-lg font-semibold text-gray-800">
             {product.name}
           </h3>
-          
-          {/* <p className="text-gray-500 text-sm mt-1">
-            {product.description || product.indication}
-          </p> */}
-          {/* {product.presentation && (
-            <p className="text-xs text-gray-400 mt-1">{product.presentation}</p>
-          )} */}
         </div>
       </div>
     </div>

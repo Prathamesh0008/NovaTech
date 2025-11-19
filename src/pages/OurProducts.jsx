@@ -1,31 +1,46 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useParams, useNavigate } from "react-router-dom";
 import { products } from "../data/products";
 import ProductCard from "../components/ProductCard";
 import Breadcrumbs from "../components/Breadcrumbs";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function ProductsPage() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const initialCategory = searchParams.get("category") || "";
+  // const [searchParams, setSearchParams] = useSearchParams();
+  // const initialCategory = searchParams.get("category") || "";
+  // const { category } = useParams();
+  // const [selectedCategory, setSelectedCategory] = useState(initialCategory);
+  const navigate = useNavigate();
 
-  const [selectedCategory, setSelectedCategory] = useState(initialCategory);
+  const { category } = useParams();
+  // Category dropdown list
+const categoryOptions = ["Tablets", "Injectables"];
+
+const initialCategory = category ? category.charAt(0).toUpperCase() + category.slice(1) : "";
+const [selectedCategory, setSelectedCategory] = useState(initialCategory);
+
   const [selectedProduct, setSelectedProduct] = useState("");
   const [selectedMg, setSelectedMg] = useState("");
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
+  // 🆕 Slug function for SEO URLs
+  const slugify = (name) =>
+    name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+
+  // 🆕 Build clean SEO URL → /products/category/product-slug
+  const detailUrl = (p) => {
+    const category = (p.category || "").toLowerCase();
+    const slug = slugify(p.name);
+    return `/products/${category}/${slug}`;
+  };
+
   // Keep the selected category mirrored in the URL (?category=Tablets/Injectables)
-  useEffect(() => {
-    if (selectedCategory) {
-      setSearchParams({ category: selectedCategory });
-    } else {
-      setSearchParams({});
-    }
-  }, [selectedCategory, setSearchParams]);
+  
 
-  const categoryOptions = ["Tablets", "Injectables"];
-
-  // Product options depend on selected category
+  // Product dropdown options
   const productOptions = useMemo(() => {
     if (!selectedCategory) return [];
     const filtered = products.filter(
@@ -34,20 +49,17 @@ export default function ProductsPage() {
     return Array.from(new Set(filtered.map((p) => p.name))).sort();
   }, [selectedCategory]);
 
-  // ✅ Dosage options now depend on selected product (and category)
+  // Dosage mg filter options
   const mgOptions = useMemo(() => {
     const strengths = new Set();
-
     let filteredList = products;
 
-    // filter by selected category if chosen
     if (selectedCategory) {
       filteredList = filteredList.filter(
         (p) => p.category?.toLowerCase() === selectedCategory.toLowerCase()
       );
     }
 
-    // filter by selected product if chosen
     if (selectedProduct) {
       filteredList = filteredList.filter(
         (p) => p.name.toLowerCase() === selectedProduct.toLowerCase()
@@ -56,9 +68,7 @@ export default function ProductsPage() {
 
     filteredList.forEach((p) => {
       const match = p.description?.match(/(\d+(\.\d+)?\s?(mg|mcg))/gi);
-      if (match) {
-        match.forEach((m) => strengths.add(m.toLowerCase()));
-      }
+      if (match) match.forEach((m) => strengths.add(m.toLowerCase()));
     });
 
     return Array.from(strengths).sort((a, b) => parseFloat(a) - parseFloat(b));
@@ -82,12 +92,6 @@ export default function ProductsPage() {
     return matchCategory && matchProduct && matchMg;
   });
 
-  // helper: pretty URL for detail with category preserved
-  const detailUrl = (p) =>
-    `/products/${encodeURIComponent(p.id || p.name)}?category=${encodeURIComponent(
-      selectedCategory || p.category || ""
-    )}`;
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#f5f9fb] via-[#f3f8fa] to-[#e8f3f8]">
       {/* ===== Header ===== */}
@@ -105,30 +109,21 @@ export default function ProductsPage() {
               </p>
             </div>
 
-            {/* ===== Mobile Filter Toggle ===== */}
+            {/* ===== Mobile Filters ===== */}
             <div className="block md:hidden mt-4">
               <button
                 onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
                 className="flex items-center justify-center gap-2 bg-white/20 text-white font-medium px-4 py-2 rounded-lg backdrop-blur-md hover:bg-white/30 transition-all duration-200"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-5 h-5"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3.75 5.25h16.5m-11.25 6h11.25m-6.75 6h6.75"
-                  />
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                  viewBox="0 0 24 24" strokeWidth="1.5"
+                  stroke="currentColor" className="w-5 h-5">
+                  <path strokeLinecap="round" strokeLinejoin="round"
+                    d="M3.75 5.25h16.5m-11.25 6h11.25m-6.75 6h6.75" />
                 </svg>
                 {mobileFilterOpen ? "Close Filters" : "Filters"}
               </button>
 
-              {/* ===== Animated Mobile Filter ===== */}
               <AnimatePresence>
                 {mobileFilterOpen && (
                   <motion.div
@@ -138,7 +133,7 @@ export default function ProductsPage() {
                     transition={{ duration: 0.3 }}
                     className="mt-3 bg-white text-gray-800 rounded-xl shadow-xl p-4 border border-gray-100 space-y-4"
                   >
-                    {/* Category Filter */}
+                    {/* Category */}
                     <div>
                       <label className="block text-sm font-semibold text-[#18487d] mb-2">
                         Category
@@ -146,11 +141,15 @@ export default function ProductsPage() {
                       <select
                         className="w-full border rounded-lg p-2 focus:ring-2 focus:ring-[#3386bc]"
                         value={selectedCategory}
-                        onChange={(e) => {
-                          setSelectedCategory(e.target.value);
-                          setSelectedProduct("");
-                          setSelectedMg("");
-                        }}
+                       onChange={(e) => {
+  const newCat = e.target.value;
+  setSelectedCategory(newCat);
+  setSelectedProduct("");
+  setSelectedMg("");
+  navigate(`/products/${newCat.toLowerCase()}`);
+}}
+
+
                       >
                         <option value="">All</option>
                         {categoryOptions.map((cat) => (
@@ -161,7 +160,7 @@ export default function ProductsPage() {
                       </select>
                     </div>
 
-                    {/* Product Filter */}
+                    {/* Product */}
                     <div>
                       <label className="block text-sm font-semibold text-[#18487d] mb-2">
                         Product
@@ -184,7 +183,7 @@ export default function ProductsPage() {
                       </select>
                     </div>
 
-                    {/* Dosage Filter */}
+                    {/* Dosage */}
                     <div>
                       <label className="block text-sm font-semibold text-[#18487d] mb-2">
                         Dosage Strength
@@ -211,24 +210,36 @@ export default function ProductsPage() {
         </div>
       </div>
 
-      {/* ===== Main Content ===== */}
+      {/* ===== MAIN CONTENT ===== */}
       <div className="max-w-7xl mx-auto px-4 md:px-8 mt-10 pb-20 flex flex-col md:flex-row gap-8">
-        {/* ===== Sidebar (Desktop Filters) ===== */}
+        
+        {/* ===== Sidebar Filters (Desktop) ===== */}
         <aside className="hidden md:block md:w-1/4 bg-white p-6 shadow-lg sticky top-10 h-fit space-y-6">
-          {/* Category Filter */}
+          
+          {/* Category */}
           <div>
             <label className="block text-sm font-semibold text-[#18487d] mb-2">
               Category
             </label>
             <select
-              className="w-full p-2 focus:ring-2 focus:ring-[#3386bc]"
-              value={selectedCategory}
-              onChange={(e) => {
-                setSelectedCategory(e.target.value);
-                setSelectedProduct("");
-                setSelectedMg("");
-              }}
-            >
+  className="w-full p-2 focus:ring-2 focus:ring-[#3386bc]"
+  value={selectedCategory}
+  onChange={(e) => {
+    const newCat = e.target.value;
+
+    setSelectedCategory(newCat);
+    setSelectedProduct("");
+    setSelectedMg("");
+
+    // ⭐ UPDATE URL
+    if (newCat) {
+      navigate(`/products/${newCat.toLowerCase()}`);
+    } else {
+      navigate(`/products`);
+    }
+  }}
+>
+
               <option value="">All</option>
               {categoryOptions.map((cat) => (
                 <option key={cat} value={cat}>
@@ -238,7 +249,7 @@ export default function ProductsPage() {
             </select>
           </div>
 
-          {/* Product Filter */}
+          {/* Product */}
           <div>
             <label className="block text-sm font-semibold text-[#18487d] mb-2">
               Product
@@ -261,7 +272,7 @@ export default function ProductsPage() {
             </select>
           </div>
 
-          {/* Dosage Filter */}
+          {/* Dosage */}
           <div>
             <label className="block text-sm font-semibold text-[#18487d] mb-2">
               Dosage Strength
@@ -282,7 +293,7 @@ export default function ProductsPage() {
           </div>
         </aside>
 
-        {/* ===== Product Grid ===== */}
+        {/* ===== Products Grid ===== */}
         <main className="flex-1">
           {filteredProducts.length === 0 ? (
             <div className="text-center text-gray-500 py-16">
@@ -298,16 +309,15 @@ export default function ProductsPage() {
                   transition={{ duration: 0.3 }}
                   className="transition-transform transform hover:-translate-y-1 hover:shadow-xl duration-300"
                 >
-                  <Link to={detailUrl(p)}>
-                    <ProductCard
-                      product={{
-                        ...p,
-                        image:
-                          p.images?.[0] ||
-                          "https://via.placeholder.com/500x500?text=No+Image",
-                      }}
-                    />
-                  </Link>
+                 <ProductCard
+  product={{
+    ...p,
+    slug: slugify(p.name),         // 👈 add this!
+    image: p.images?.[0] || "https://via.placeholder.com/500x500?text=No+Image",
+  }}
+/>
+
+
                 </motion.div>
               ))}
             </div>
