@@ -42,6 +42,11 @@ export default function DiseaseFeaturedSection() {
   const onViewAllCategories = () => {
     navigate(`/products`);
   };
+   const slugify = (name) =>
+  name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 
   return (
     <section className="my-20" data-aos="fade-up">
@@ -106,14 +111,17 @@ export default function DiseaseFeaturedSection() {
         {toShow.length > 0 ? (
           toShow.map((p) => (
             <div key={p.id} className="h-full">
-              <ProductCard
-                product={{
-                  ...p,
-                  image:
-                    p.images?.[0] ||
-                    "https://via.placeholder.com/500x500?text=No+Image",
-                }}
-              />
+             
+
+<ProductCard
+  product={{
+    ...p,
+    slug: slugify(p.name),       // 👈 REQUIRED
+    category: p.category,        // 👈 REQUIRED
+    images: p.images,            // 👈 REQUIRED
+  }}
+/>
+
             </div>
           ))
         ) : (

@@ -1,7 +1,12 @@
+Options +FollowSymLinks
 RewriteEngine On
 RewriteBase /
 
+# React SPA route fallback
 RewriteRule ^index\.html$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.html [L]
+
+# Send 404s to React 404 page
+ErrorDocument 404 /index.html

@@ -1,4 +1,10 @@
 import React from "react";
+import iso from "../assets/certificates/iso.png"
+import gmp from "../assets/certificates/gmp.png"
+import production from "../assets/certificates/production.jpg"
+import recycle from "../assets/certificates/Recycle.png"
+
+
 
 export default function AboutBackground() {
   return (
@@ -107,32 +113,46 @@ export default function AboutBackground() {
         </div>
 
         {/* ===== Certifications ===== */}
-        <div className="mt-16 grid sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl">
-          {[
-            "WHO-GMP Certified",
-            "ISO 9001:2015 Quality Standards",
-            "Environmentally Responsible",
-            "Sustainable Manufacturing",
-          ].map((cert, i) => (
-            <div
-              key={i}
-              className="bg-white/10 backdrop-blur-md p-6 rounded-lg shadow-md text-center hover:bg-white/20 transition"
-            >
-              <h3 className="text-lg font-semibold text-[#314977]">{cert}</h3>
-            </div>
-          ))}
-        </div>
-      </div>
+        {/* ===== Certifications with Images ===== */}
+<div className="mt-16 max-w-6xl w-full">
+  <h2 className="text-2xl md:text-3xl font-semibold mb-8 text-center text-white">
+    Our Certifications
+  </h2>
 
-      {/* ===== CSS Animations ===== */}
-      <style>
-        {`
-          @keyframes wave {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-          }
-        `}
-      </style>
+  <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
+    {[
+      {
+        title: "WHO-GMP Certified",
+        img: gmp,
+      },
+      {
+        title: "ISO 9001:2015",
+        img: iso,
+      },
+      {
+        title: "Environmental Compliance",
+        img: recycle,
+      },
+      {
+        title: "Sustainable Manufacturing",
+        img: production,
+      },
+    ].map((cert, i) => (
+      <div
+        key={i}
+        className="bg-white/10 backdrop-blur-md p-4 rounded-xl shadow-lg hover:bg-white/20 transition text-center"
+      >
+        <img
+          src={cert.img}
+          alt={cert.title}
+          className="w-full h-32 object-contain mb-3 drop-shadow-lg"
+        />
+        <h3 className="text-lg font-semibold text-[#0b1e39]">{cert.title}</h3>
+      </div>
+    ))}
+  </div>
+</div>
+      </div>
     </div>
   );
 }
