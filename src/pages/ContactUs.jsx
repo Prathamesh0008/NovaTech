@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
 import Breadcrumbs from "../components/Breadcrumbs";
 import { Send, Mail, Phone, MapPin } from "lucide-react";
+import { Title, Meta, Link as LinkTag } from "react-head";
+
 
 export default function ContactUs() {
   const [formData, setFormData] = useState({
@@ -54,6 +56,35 @@ export default function ContactUs() {
 
   return (
     <div className="min-h-auto bg-gradient-to-b from-[#f5f9fb] via-[#f3f8fa] to-[#e8f3f8]">
+      <Title>Contact NovaTech Sciences | Steroid Pharma Support</Title>
+<Meta name="description" content="Get in touch with NovaTech Sciences for inquiries about our premium steroid medicines, product verification, distribution, or customer support. We’re here to assist you." />
+<Meta name="keywords" content="steroid pharmaceutical support, pharma contact page, NovaTech customer service" />
+<Meta name="robots" content="index, follow" />
+<LinkTag rel="canonical" href="https://novatechsciences.com/contact" />
+<script type="application/ld+json">
+{`
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://novatechsciences.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://novatechsciences.com/blog"
+    }
+  ]
+}
+`}
+</script>
+
+
       {/* HEADER */}
       <div className="bg-gradient-to-r from-[#0b1e39] via-[#18487d] to-[#3386bc] text-white py-10 shadow-md mb-10">
         <div className="max-w-6xl mx-auto px-6">

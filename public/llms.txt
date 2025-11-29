@@ -1,0 +1,24 @@
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Spider
+Allow: /
+
+# Block unknown/unauthorized bots (optional, increases server safety)
+User-agent: *
+Disallow: /private/
+Disallow: /admin/
+Disallow: /server/
+Disallow: /api/private/

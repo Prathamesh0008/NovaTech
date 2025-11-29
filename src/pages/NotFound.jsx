@@ -1,11 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import errimg from "../assets/errimg.png";
+import { Title, Meta } from "react-head";
+
 
 export default function NotFound() {
   return (
     <div className=" flex flex-col items-center justify-center bg-[#f3f7fa] px-6 py-10">
-      
+      <>
+  <Title>Page Not Found | NovaTech Sciences</Title>
+  <Meta name="robots" content="noindex, nofollow" />
+  
+
+  {/* Your 404 UI */}
+</>
+
       {/* Header Bar (Professional Look) */}
       <div className="w-full bg-gradient-to-r from-[#0b1e39] via-[#18487d] to-[#3386bc] py-10 shadow-md mb-10 text-center">
         <h1 className="text-4xl md:text-5xl font-bold text-white tracking-wide">

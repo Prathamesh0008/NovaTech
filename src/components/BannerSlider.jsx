@@ -13,6 +13,8 @@ export default function BannerSlider({ banners }) {
   const handleImageLoad = (index) => {
     setImageLoaded((prev) => ({ ...prev, [index]: true }));
   };
+  
+
 
   return (
     <Swiper
@@ -24,16 +26,38 @@ export default function BannerSlider({ banners }) {
       navigation
       pagination={{ clickable: true }}
       className="
-        w-full
-        h-[22vh]
-        sm:h-[26vh]
-        md:h-[40vh]
-        lg:h-[55vh]
-        xl:h-[60vh]
-        relative
-        overflow-hidden
-      "
-    >
+  w-full
+  h-[28vh]
+  sm:h-[26vh]
+  md:h-[40vh]
+  lg:h-[65vh]
+  xl:h-[60vh]  
+  laptop-small-height   
+  relative
+  overflow-hidden
+"    >
+          <style>
+{`
+  @keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fadeInUp {
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards;
+  }
+
+  /* Only for small-height laptops (1024×639, 1366×664, 1440×650, etc.) */
+  @media (min-width: 1024px) and (max-height: 700px) {
+    .laptop-small-height {
+      height: 72vh !important;
+    }
+  }
+`}
+</style>
+
+
+      
       {banners.map((banner, idx) => (
         <SwiperSlide key={idx}>
           <div className="relative w-full h-full">
@@ -91,7 +115,7 @@ export default function BannerSlider({ banners }) {
               <div className="  p-2 rounded-md md:bg-transparent md:backdrop-blur-0">
                 
                 {/* TITLE FIXED */}
-                <h1
+                <h2
   className="
     text-base        
     sm:text-lg       
@@ -110,7 +134,7 @@ export default function BannerSlider({ banners }) {
                         </React.Fragment>
                       ))
                     : banner.title}
-                </h1>
+                </h2>
 
                 {/* SUBTITLE FIXED */}
                 {banner.subtitle && (

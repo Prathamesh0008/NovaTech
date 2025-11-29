@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Breadcrumbs from "../components/Breadcrumbs";
 import { Calendar, ArrowRight } from "lucide-react";
+import { Title, Meta, Link as LinkTag } from "react-head";
 import blog1 from '../assets/blogs/blog1.jpg'
 import blog2 from '../assets/blogs/blog2.jpg'
 import blog3 from '../assets/blogs/blog3.jpg'
@@ -10,6 +11,11 @@ import blog4 from '../assets/blogs/blog1.jpg'
 
 
 export default function Blog() {
+  const pageTitle = "NovaTech Sciences Blog – Research, Pharma & Wellness Insights";
+  const pageDescription =
+    "Read expert articles from NovaTech Sciences on pharmaceuticals, wellness, hormone therapy, exports, GMP compliance, nutraceutical trends, and manufacturing insights.";
+  const pageUrl = "https://novatechsciences.com/blog";
+
   const blogs = [
     {
       id: 1,
@@ -105,6 +111,39 @@ export default function Blog() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#f5f9fb] via-[#f3f8fa] to-[#e8f3f8]">
+        {/* ⭐ SEO TAGS FOR BLOG PAGE */}
+      <Title>{pageTitle}</Title>
+      <Meta name="description" content={pageDescription} />
+      <Meta name="keywords" content="pharma blog, pharmaceutical insights, novatech sciences blog, hormon therapy, gmp manufacturing, nutraceuticals india, pharma exports" />
+      <Meta property="og:title" content={pageTitle} />
+      <Meta property="og:description" content={pageDescription} />
+      <Meta property="og:type" content="website" />
+      <Meta property="og:url" content={pageUrl} />
+      <LinkTag rel="canonical" href={pageUrl} />
+      <script type="application/ld+json">
+{`
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://novatechsciences.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://novatechsciences.com/blog"
+    }
+  ]
+}
+`}
+</script>
+
+
       {/* ===== HEADER ===== */}
       <div className="bg-gradient-to-r from-[#0b1e39] via-[#18487d] to-[#3386bc] text-white py-10 shadow-md mb-10">
         <div className="max-w-6xl mx-auto px-6">

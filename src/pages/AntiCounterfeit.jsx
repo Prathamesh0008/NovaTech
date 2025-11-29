@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Breadcrumbs from "../components/Breadcrumbs";
 import { ShieldCheck, AlertTriangle } from "lucide-react";
+import { Title, Meta, Link as LinkTag } from "react-head";
+
 
 export default function AntiCounterfeit() {
   const [serialNumber, setSerialNumber] = useState("");
@@ -26,6 +28,35 @@ export default function AntiCounterfeit() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#f5f9fb] via-[#f3f8fa] to-[#e8f3f8]">
+      <Title>NovaTech Anti-Counterfeit | Verify Genuine Steroid Products</Title>
+<Meta name="description" content="Ensure your NovaTech Sciences steroid products are authentic. Learn how our anti-counterfeit system protects customers with secure verification and advanced tracking technology." />
+<Meta name="keywords" content="NovaTech product validation, genuine steroid product verification, NovaTech anti counterfeit" />
+<Meta name="robots" content="index, follow" />
+<LinkTag rel="canonical" href="https://novatechsciences.com/anti-counterfeit" />
+<script type="application/ld+json">
+{`
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://novatechsciences.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://novatechsciences.com/blog"
+    }
+  ]
+}
+`}
+</script>
+
+
       {/* Header */}
       <div className="bg-gradient-to-r from-[#0b1e39] via-[#18487d] to-[#3386bc] text-white py-10 shadow-md mb-10">
         <div className="max-w-5xl mx-auto px-6">

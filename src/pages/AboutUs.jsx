@@ -2,10 +2,41 @@ import React from "react";
 import Breadcrumbs from "../components/Breadcrumbs";
 import AboutBackground from "../components/AboutBackground";
 import DNAOverlay from "../components/DNAOverlay";
+import { Title, Meta, Link as LinkTag } from "react-head";
+
 
 export default function AboutUs() {
   return (
     <div className="max-w-full mx-auto mt-5 text-center">
+      <Title>About NovaTech Sciences | Pharmaceutical Steroid Products</Title>
+<Meta name="description" content="Discover NovaTech Sciences, a leader in premium steroid formulations and performance-enhancing medicines, delivering trusted quality, innovation, and pharmaceutical excellence worldwide." />
+<Meta name="keywords" content="Steroid Pharma Maker, steroid pharma company, injectable steroid manufacturer" />
+<Meta name="robots" content="index, follow" />
+<LinkTag rel="canonical" href="https://novatechsciences.com/about" />
+<script type="application/ld+json">
+{`
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://novatechsciences.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://novatechsciences.com/blog"
+    }
+  ]
+}
+`}
+</script>
+
+
       <Breadcrumbs/>
       <AboutBackground/>
       <DNAOverlay/>

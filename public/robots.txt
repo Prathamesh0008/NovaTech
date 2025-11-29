@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Block useless files
+Disallow: /node_modules/
+Disallow: /src/
+Disallow: /admin/
+Disallow: /server/
+Disallow: /api/private/
+Disallow: /config/
+Disallow: /tmp/
+
+Sitemap: https://novatechsciences.com/sitemap.xml
+
+

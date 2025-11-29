@@ -2,6 +2,8 @@ import React from "react";
 import { useParams, Link } from "react-router-dom";
 import Breadcrumbs from "../components/Breadcrumbs";
 import { Calendar } from "lucide-react";
+import { Title, Meta, Link as LinkTag } from "react-head";
+
 import blog1 from '../assets/blogs/blog1.jpg'
 import blog2 from '../assets/blogs/blog2.jpg'
 import blog3 from '../assets/blogs/blog3.jpg'
@@ -53,6 +55,11 @@ const blogData = [
 ];
 
 export default function BlogDetails() {
+  // Generate SEO based on the blog data
+const pageTitle = `${blog.title} | NovaTech Sciences Blog`;
+const pageDescription = blog.excerpt;
+const canonicalUrl = `https://novatechsciences.com/blog/${id}`;
+
   const { id } = useParams();
   const blog = blogData.find((b) => b.id === parseInt(id));
 
@@ -69,6 +76,42 @@ export default function BlogDetails() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#f5f9fb] via-[#f3f8fa] to-[#e8f3f8]">
+      <>
+  <Title>{pageTitle}</Title>
+  <Meta name="description" content={pageDescription} />
+  <Meta name="keywords" content={`${blog.category}, steroid pharma blog, NovaTech Sciences articles`} />
+  <Meta name="robots" content="index, follow" />
+  <LinkTag rel="canonical" href={canonicalUrl} />
+  <script type="application/ld+json">
+{`
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "${blog.title}",
+  "image": "${blog.image}",
+  "datePublished": "${blog.date}",
+  "author": {
+    "@type": "Organization",
+    "name": "Novatech Sciences"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Novatech Sciences",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://novatechsciences.com/novalogoo.png"
+    }
+  },
+  "description": "${blog.excerpt}"
+}
+`}
+</script>
+
+
+
+  {/* Original page code continues here */}
+</>
+
       {/* HEADER */}
       <div className="bg-gradient-to-r from-[#0b1e39] via-[#18487d] to-[#3386bc] text-white py-10 shadow-md mb-10">
         <div className="max-w-6xl mx-auto px-6">

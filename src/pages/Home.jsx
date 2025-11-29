@@ -10,14 +10,16 @@ import CategoryCard from "../components/CategoryCard";
 import HeroSection from "../components/HeroSection";
 import DiseaseFeaturedSection from "../components/DiseaseFeaturedSection";
 import BannerSlider from "../components/BannerSlider";
-import banner1 from "../assets/banners/2.jpg";
-import banner2 from "../assets/banners/3.jpg";
+import banner2 from "../assets/banners/2.jpg";
+import banner1 from "../assets/banners/3.jpg";
 import banner3 from "../assets/banners/4.jpg";
 import banner5 from "../assets/banners/1.jpg";
 import sbanner1 from "../assets/smallBanners/Tablets-box.png"
 import sbanner2 from "../assets/smallBanners/Injectable-box.png"
 import { handleCtrlClick } from "../utils/openInNewTab";   // <-- NEW
 import { useNavigate } from "react-router-dom";
+import { Title, Meta, Link as LinkTag } from "react-head";
+
 
 
 
@@ -140,6 +142,35 @@ export default function Home() {
 
   return (
     <>
+    <Title>Novatech Sciences – Premium Steroids & Performance Medicines Online</Title>
+<Meta name="description" content="Buy high-quality steroid medicines and performance-enhancing products online in India. Novatech Sciences provides trusted formulations, anti-counterfeit protection, and premium-grade results." />
+<Meta name="keywords" content="best steroids medicine online India, buy steroids online India, Novatech Sciences, pharma-grade steroids" />
+<Meta name="robots" content="index, follow" />
+<LinkTag rel="canonical" href="https://novatechsciences.com/" />
+<script type="application/ld+json">
+{`
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://novatechsciences.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://novatechsciences.com/blog"
+    }
+  ]
+}
+`}
+</script>
+
+
       {/* ✅ Banner Section */}
       <BannerSlider banners={banners} />
 
